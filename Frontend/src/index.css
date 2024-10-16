@@ -11,15 +11,11 @@
 	--main-color: #457b9d;
 	--alert-color: hsl(355, 57%, 50%);
 	--fg: hsl(0, 0%, 10%);
+	--ff: 'Work Sans', sans-serif;
+	--shadow: hsla(0, 0, 0, 0.4);
+	--p: clamp(1.6rem, 3vw, 1.8rem) / 1.8 var(--ff);
+	--subtext: clamp(1.1rem, 3vw, 1.2rem) / 1.6 var(--ff);
 }
-/* @media (prefers-color-scheme: dark) {
-	:root {
-		--bgc: hsl(0, 0%, 10%);
-		--main-color: hsl(182, 43%, 76%);
-		--alert-color: hsl(355, 70%, 56%);
-		--fg: hsl(0, 0%, 96%);
-	}
-} */
 
 html {
 	scroll-behavior: smooth;
@@ -28,12 +24,14 @@ html {
 
 body {
 	font-size: 1.6rem;
-	font-family: 'Work Sans', sans-serif;
-	font-optical-sizing: auto;
+	font-family: var(--ff);
 	font-weight: 400;
-	font-style: normal;
 	background-color: var(--bgc);
 	color: var(--fg);
+}
+
+p {
+	font: var(--p);
 }
 
 ul,
