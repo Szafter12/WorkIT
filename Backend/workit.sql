@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1deb3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Paź 17, 2024 at 08:49 PM
--- Wersja serwera: 8.0.39-0ubuntu0.24.04.2
--- Wersja PHP: 8.3.6
+-- Host: 127.0.0.1
+-- Generation Time: Paź 18, 2024 at 12:56 AM
+-- Wersja serwera: 10.4.32-MariaDB
+-- Wersja PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,22 +28,16 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `abilities` (
-  `ability_id` int NOT NULL,
-  `ability_name` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL
+  `ability_id` int(11) NOT NULL,
+  `ability_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
--- --------------------------------------------------------
-
 --
--- Struktura tabeli dla tabeli `address`
+-- Dumping data for table `abilities`
 --
 
-CREATE TABLE `address` (
-  `address_id` int NOT NULL,
-  `city_id` int NOT NULL,
-  `street` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL,
-  `user_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+INSERT INTO `abilities` (`ability_id`, `ability_name`) VALUES
+(1, 'JavaScript');
 
 -- --------------------------------------------------------
 
@@ -52,8 +46,8 @@ CREATE TABLE `address` (
 --
 
 CREATE TABLE `category` (
-  `category_id` int NOT NULL,
-  `category` varchar(25) COLLATE utf8mb4_polish_ci NOT NULL
+  `category_id` int(11) NOT NULL,
+  `category` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
@@ -70,10 +64,10 @@ INSERT INTO `category` (`category_id`, `category`) VALUES
 --
 
 CREATE TABLE `city` (
-  `city_id` int NOT NULL,
-  `city` varchar(30) COLLATE utf8mb3_polish_ci NOT NULL,
-  `postal_code` varchar(10) COLLATE utf8mb3_polish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_polish_ci;
+  `city_id` int(11) NOT NULL,
+  `city` varchar(30) NOT NULL,
+  `postal_code` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
 -- Dumping data for table `city`
@@ -109,14 +103,27 @@ INSERT INTO `city` (`city_id`, `city`, `postal_code`) VALUES
 --
 
 CREATE TABLE `companies` (
-  `company_id` int NOT NULL,
-  `company_name` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
-  `company_logo_url` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
-  `phone` varchar(15) COLLATE utf8mb4_polish_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_polish_ci NOT NULL,
-  `company_info` text COLLATE utf8mb4_polish_ci NOT NULL,
-  `addition_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `company_id` int(11) NOT NULL,
+  `company_name` varchar(255) NOT NULL,
+  `company_logo_url` varchar(255) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `company_info` text NOT NULL,
+  `addition_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `company_address`
+--
+
+CREATE TABLE `company_address` (
+  `company_address_id` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  `street` varchar(100) NOT NULL,
+  `city_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -125,9 +132,16 @@ CREATE TABLE `companies` (
 --
 
 CREATE TABLE `contract_type` (
-  `contract_type_id` int NOT NULL,
-  `contract_name` varchar(50) COLLATE utf8mb4_polish_ci NOT NULL
+  `contract_type_id` int(11) NOT NULL,
+  `contract_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `contract_type`
+--
+
+INSERT INTO `contract_type` (`contract_type_id`, `contract_name`) VALUES
+(1, 'B2B');
 
 -- --------------------------------------------------------
 
@@ -136,9 +150,16 @@ CREATE TABLE `contract_type` (
 --
 
 CREATE TABLE `job_level` (
-  `level_id` int NOT NULL,
-  `level` varchar(25) COLLATE utf8mb4_polish_ci NOT NULL
+  `level_id` int(11) NOT NULL,
+  `level` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `job_level`
+--
+
+INSERT INTO `job_level` (`level_id`, `level`) VALUES
+(1, 'Junior');
 
 -- --------------------------------------------------------
 
@@ -147,10 +168,10 @@ CREATE TABLE `job_level` (
 --
 
 CREATE TABLE `job_requirements` (
-  `id` int NOT NULL,
-  `post_id` int DEFAULT NULL,
-  `requirement` text COLLATE utf8mb3_polish_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_polish_ci;
+  `id` int(11) NOT NULL,
+  `post_id` int(11) DEFAULT NULL,
+  `requirement` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------
 
@@ -159,10 +180,10 @@ CREATE TABLE `job_requirements` (
 --
 
 CREATE TABLE `job_responibilities` (
-  `id` int NOT NULL,
-  `post_id` int DEFAULT NULL,
-  `responsibilities` text COLLATE utf8mb3_polish_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_polish_ci;
+  `id` int(11) NOT NULL,
+  `post_id` int(11) DEFAULT NULL,
+  `responsibilities` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------
 
@@ -171,9 +192,16 @@ CREATE TABLE `job_responibilities` (
 --
 
 CREATE TABLE `languages` (
-  `language_id` int NOT NULL,
-  `language` varchar(50) COLLATE utf8mb4_polish_ci NOT NULL
+  `language_id` int(11) NOT NULL,
+  `language` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `languages`
+--
+
+INSERT INTO `languages` (`language_id`, `language`) VALUES
+(2, 'Polish');
 
 -- --------------------------------------------------------
 
@@ -182,16 +210,16 @@ CREATE TABLE `languages` (
 --
 
 CREATE TABLE `posts` (
-  `post_id` int NOT NULL,
-  `company_id` int NOT NULL,
-  `job_title` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
-  `level_id` int NOT NULL,
-  `contract_type_id` int NOT NULL,
-  `job_description` text COLLATE utf8mb4_polish_ci NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  `job_title` varchar(255) NOT NULL,
+  `level_id` int(11) NOT NULL,
+  `contract_type_id` int(11) NOT NULL,
+  `job_description` text NOT NULL,
   `end_date` date NOT NULL,
-  `work_mode_id` int NOT NULL,
-  `addition_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `work_dimension_id` int NOT NULL
+  `work_mode_id` int(11) NOT NULL,
+  `addition_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `work_dimension_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 -- --------------------------------------------------------
@@ -201,9 +229,9 @@ CREATE TABLE `posts` (
 --
 
 CREATE TABLE `post_ability` (
-  `post_id` int NOT NULL,
-  `ability_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_polish_ci;
+  `post_id` int(11) NOT NULL,
+  `ability_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------
 
@@ -212,8 +240,8 @@ CREATE TABLE `post_ability` (
 --
 
 CREATE TABLE `post_specialization` (
-  `post_id` int NOT NULL,
-  `specialization_id` int NOT NULL
+  `post_id` int(11) NOT NULL,
+  `specialization_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 -- --------------------------------------------------------
@@ -223,8 +251,8 @@ CREATE TABLE `post_specialization` (
 --
 
 CREATE TABLE `specializations` (
-  `specialization_id` int NOT NULL,
-  `specialization` varchar(50) COLLATE utf8mb4_polish_ci NOT NULL
+  `specialization_id` int(11) NOT NULL,
+  `specialization` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
@@ -232,8 +260,8 @@ CREATE TABLE `specializations` (
 --
 
 INSERT INTO `specializations` (`specialization_id`, `specialization`) VALUES
-(1, 'Frontend'),
-(2, 'Backend');
+(2, 'Backend'),
+(1, 'Frontend');
 
 -- --------------------------------------------------------
 
@@ -242,17 +270,17 @@ INSERT INTO `specializations` (`specialization_id`, `specialization`) VALUES
 --
 
 CREATE TABLE `users` (
-  `user_id` int NOT NULL,
-  `name` varchar(15) COLLATE utf8mb4_polish_ci NOT NULL,
-  `surname` varchar(15) COLLATE utf8mb4_polish_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(15) NOT NULL,
+  `surname` varchar(15) NOT NULL,
   `date_of_birth` date NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_polish_ci NOT NULL,
-  `phone` varchar(15) COLLATE utf8mb4_polish_ci NOT NULL,
-  `prof_picture_path` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
-  `background_picture_path` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
-  `description` text COLLATE utf8mb4_polish_ci NOT NULL,
-  `addition_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `email` varchar(50) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `prof_picture_path` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `background_picture_path` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `addition_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 -- --------------------------------------------------------
@@ -262,9 +290,22 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `user_abilities` (
-  `user_id` int NOT NULL,
-  `ability_id` int NOT NULL
+  `user_id` int(11) NOT NULL,
+  `ability_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `user_address`
+--
+
+CREATE TABLE `user_address` (
+  `user_address_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `street` varchar(100) NOT NULL,
+  `city_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -273,11 +314,11 @@ CREATE TABLE `user_abilities` (
 --
 
 CREATE TABLE `user_education` (
-  `education_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `school_name` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
-  `degree` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
-  `field_name` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
+  `education_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `school_name` varchar(255) NOT NULL,
+  `degree` varchar(255) NOT NULL,
+  `field_name` varchar(255) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
@@ -289,9 +330,9 @@ CREATE TABLE `user_education` (
 --
 
 CREATE TABLE `user_language` (
-  `language_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `level` set('A1','A2','B1','B2','C1','C2') COLLATE utf8mb4_polish_ci NOT NULL
+  `language_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `level` set('A1','A2','B1','B2','C1','C2') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 -- --------------------------------------------------------
@@ -301,10 +342,10 @@ CREATE TABLE `user_language` (
 --
 
 CREATE TABLE `user_social_links` (
-  `social_link_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `platform_name` varchar(100) COLLATE utf8mb4_polish_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL
+  `social_link_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `platform_name` varchar(100) NOT NULL,
+  `url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 -- --------------------------------------------------------
@@ -314,10 +355,10 @@ CREATE TABLE `user_social_links` (
 --
 
 CREATE TABLE `user_work` (
-  `user_work_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `comapny_name` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
-  `position` varchar(255) COLLATE utf8mb4_polish_ci NOT NULL,
+  `user_work_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `comapny_name` varchar(255) NOT NULL,
+  `position` varchar(255) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
@@ -329,9 +370,16 @@ CREATE TABLE `user_work` (
 --
 
 CREATE TABLE `work_dimension` (
-  `work_dimension_id` int NOT NULL,
-  `work_dimension_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_polish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_polish_ci;
+  `work_dimension_id` int(11) NOT NULL,
+  `work_dimension_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Dumping data for table `work_dimension`
+--
+
+INSERT INTO `work_dimension` (`work_dimension_id`, `work_dimension_name`) VALUES
+(1, 'Pełny etat');
 
 -- --------------------------------------------------------
 
@@ -340,9 +388,16 @@ CREATE TABLE `work_dimension` (
 --
 
 CREATE TABLE `work_mode` (
-  `work_mode_id` int NOT NULL,
-  `work_mode_name` varchar(25) COLLATE utf8mb3_polish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_polish_ci;
+  `work_mode_id` int(11) NOT NULL,
+  `work_mode_name` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Dumping data for table `work_mode`
+--
+
+INSERT INTO `work_mode` (`work_mode_id`, `work_mode_name`) VALUES
+(1, 'Hybrydowo');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -352,15 +407,8 @@ CREATE TABLE `work_mode` (
 -- Indeksy dla tabeli `abilities`
 --
 ALTER TABLE `abilities`
-  ADD PRIMARY KEY (`ability_id`);
-
---
--- Indeksy dla tabeli `address`
---
-ALTER TABLE `address`
-  ADD PRIMARY KEY (`address_id`),
-  ADD KEY `city_id` (`city_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`ability_id`),
+  ADD UNIQUE KEY `ability_name` (`ability_name`);
 
 --
 -- Indeksy dla tabeli `category`
@@ -381,19 +429,32 @@ ALTER TABLE `city`
 -- Indeksy dla tabeli `companies`
 --
 ALTER TABLE `companies`
-  ADD PRIMARY KEY (`company_id`);
+  ADD PRIMARY KEY (`company_id`),
+  ADD UNIQUE KEY `company_name` (`company_name`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `phone` (`phone`);
+
+--
+-- Indeksy dla tabeli `company_address`
+--
+ALTER TABLE `company_address`
+  ADD PRIMARY KEY (`company_address_id`),
+  ADD KEY `city_id` (`city_id`),
+  ADD KEY `company_id` (`company_id`);
 
 --
 -- Indeksy dla tabeli `contract_type`
 --
 ALTER TABLE `contract_type`
-  ADD PRIMARY KEY (`contract_type_id`);
+  ADD PRIMARY KEY (`contract_type_id`),
+  ADD UNIQUE KEY `contract_name` (`contract_name`);
 
 --
 -- Indeksy dla tabeli `job_level`
 --
 ALTER TABLE `job_level`
-  ADD PRIMARY KEY (`level_id`);
+  ADD PRIMARY KEY (`level_id`),
+  ADD UNIQUE KEY `level` (`level`);
 
 --
 -- Indeksy dla tabeli `job_requirements`
@@ -413,7 +474,8 @@ ALTER TABLE `job_responibilities`
 -- Indeksy dla tabeli `languages`
 --
 ALTER TABLE `languages`
-  ADD PRIMARY KEY (`language_id`);
+  ADD PRIMARY KEY (`language_id`),
+  ADD UNIQUE KEY `language` (`language`);
 
 --
 -- Indeksy dla tabeli `posts`
@@ -444,13 +506,16 @@ ALTER TABLE `post_specialization`
 -- Indeksy dla tabeli `specializations`
 --
 ALTER TABLE `specializations`
-  ADD PRIMARY KEY (`specialization_id`);
+  ADD PRIMARY KEY (`specialization_id`),
+  ADD UNIQUE KEY `specialization` (`specialization`);
 
 --
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `phone` (`phone`);
 
 --
 -- Indeksy dla tabeli `user_abilities`
@@ -458,6 +523,14 @@ ALTER TABLE `users`
 ALTER TABLE `user_abilities`
   ADD KEY `user_id` (`user_id`,`ability_id`),
   ADD KEY `fk_abilities` (`ability_id`);
+
+--
+-- Indeksy dla tabeli `user_address`
+--
+ALTER TABLE `user_address`
+  ADD PRIMARY KEY (`user_address_id`),
+  ADD KEY `city_id` (`city_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indeksy dla tabeli `user_education`
@@ -491,13 +564,15 @@ ALTER TABLE `user_work`
 -- Indeksy dla tabeli `work_dimension`
 --
 ALTER TABLE `work_dimension`
-  ADD PRIMARY KEY (`work_dimension_id`);
+  ADD PRIMARY KEY (`work_dimension_id`),
+  ADD UNIQUE KEY `work_dimension_name` (`work_dimension_name`);
 
 --
 -- Indeksy dla tabeli `work_mode`
 --
 ALTER TABLE `work_mode`
-  ADD PRIMARY KEY (`work_mode_id`);
+  ADD PRIMARY KEY (`work_mode_id`),
+  ADD UNIQUE KEY `work_mode_name` (`work_mode_name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -507,119 +582,126 @@ ALTER TABLE `work_mode`
 -- AUTO_INCREMENT for table `abilities`
 --
 ALTER TABLE `abilities`
-  MODIFY `ability_id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `address`
---
-ALTER TABLE `address`
-  MODIFY `address_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ability_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `city`
 --
 ALTER TABLE `city`
-  MODIFY `city_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `company_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `company_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `company_address`
+--
+ALTER TABLE `company_address`
+  MODIFY `company_address_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `contract_type`
 --
 ALTER TABLE `contract_type`
-  MODIFY `contract_type_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `contract_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `job_level`
+--
+ALTER TABLE `job_level`
+  MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `job_requirements`
 --
 ALTER TABLE `job_requirements`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `job_responibilities`
 --
 ALTER TABLE `job_responibilities`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `language_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `specializations`
 --
 ALTER TABLE `specializations`
-  MODIFY `specialization_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `specialization_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `user_address`
+--
+ALTER TABLE `user_address`
+  MODIFY `user_address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_education`
 --
 ALTER TABLE `user_education`
-  MODIFY `education_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `education_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_social_links`
 --
 ALTER TABLE `user_social_links`
-  MODIFY `social_link_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `social_link_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_work`
 --
 ALTER TABLE `user_work`
-  MODIFY `user_work_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `user_work_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `work_dimension`
 --
 ALTER TABLE `work_dimension`
-  MODIFY `work_dimension_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `work_dimension_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `work_mode`
 --
 ALTER TABLE `work_mode`
-  MODIFY `work_mode_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `work_mode_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `address`
+-- Constraints for table `company_address`
 --
-ALTER TABLE `address`
-  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `companies`
---
-ALTER TABLE `companies`
-  ADD CONSTRAINT `companies_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `address` (`user_id`) ON DELETE CASCADE;
+ALTER TABLE `company_address`
+  ADD CONSTRAINT `fk_city_id` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`),
+  ADD CONSTRAINT `fk_company_id` FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `job_requirements`
@@ -631,13 +713,7 @@ ALTER TABLE `job_requirements`
 -- Constraints for table `job_responibilities`
 --
 ALTER TABLE `job_responibilities`
-  ADD CONSTRAINT `job_responibilities_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `languages`
---
-ALTER TABLE `languages`
-  ADD CONSTRAINT `languages_ibfk_1` FOREIGN KEY (`language_id`) REFERENCES `user_language` (`language_id`);
+  ADD CONSTRAINT `fk_res_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `posts`
@@ -664,17 +740,18 @@ ALTER TABLE `post_specialization`
   ADD CONSTRAINT `fk_specialization_id` FOREIGN KEY (`specialization_id`) REFERENCES `specializations` (`specialization_id`);
 
 --
--- Constraints for table `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `address` (`user_id`) ON DELETE CASCADE;
-
---
 -- Constraints for table `user_abilities`
 --
 ALTER TABLE `user_abilities`
   ADD CONSTRAINT `fk_abilities` FOREIGN KEY (`ability_id`) REFERENCES `abilities` (`ability_id`),
   ADD CONSTRAINT `fk_user_abilities` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `user_address`
+--
+ALTER TABLE `user_address`
+  ADD CONSTRAINT `fk_user_address__id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_user_city__id` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`);
 
 --
 -- Constraints for table `user_education`
@@ -686,7 +763,8 @@ ALTER TABLE `user_education`
 -- Constraints for table `user_language`
 --
 ALTER TABLE `user_language`
-  ADD CONSTRAINT `fk_user_language` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_language_id` FOREIGN KEY (`language_id`) REFERENCES `languages` (`language_id`),
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `user_social_links`
