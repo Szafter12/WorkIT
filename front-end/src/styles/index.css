@@ -1,0 +1,69 @@
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+}
+
+body {
+	font-family: 'Work Sans', sans-serif;
+	background-color: var(--bgc-color);
+	width: 100%;
+	height: 100vh;
+	font-size: clamp(1.4rem, 5vw, 1.6rem);
+}
+
+a,
+button,
+input {
+	color: inherit;
+	font-size: inherit;
+}
+
+button,
+a {
+	cursor: pointer;
+}
+
+a {
+	text-decoration: none;
+}
+
+button {
+	background: none;
+	border: 1px solid transparent;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+}
+
+label,
+button,
+select,
+summary,
+[type='radio'],
+[type='submit'],
+[type='checkbox'] {
+	cursor: pointer;
+}
+
+menu:not(article menu),
+ol:not(article ol),
+ul:not(article ul) {
+	list-style: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
+}
