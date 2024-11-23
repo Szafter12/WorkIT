@@ -1,9 +1,16 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { Layout } from '../components/Layout/Layout'
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+	[
+		{
+			path: '/',
+			element: <Layout />,
+		},
+	],
 	{
-		path: '/',
-		element: <Layout />,
-	},
-])
+		future: {
+			v7_startTransition: true, 
+		},
+	}
+)

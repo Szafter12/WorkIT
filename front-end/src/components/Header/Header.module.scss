@@ -1,0 +1,14 @@
+.header {
+	width: 100%;
+	min-height: 80px;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 auto;
+	max-width: 1400px;
+	min-height: 80px;
+}

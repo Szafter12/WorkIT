@@ -17,7 +17,7 @@ body {
 	background-color: var(--bgc-color);
 	width: 100%;
 	height: 100vh;
-	font-size: clamp(1.4rem, 5vw, 1.6rem);
+	font-size: clamp(1.4rem, 3vw, 1.6rem);
 }
 
 a,
@@ -25,6 +25,7 @@ button,
 input {
 	color: inherit;
 	font-size: inherit;
+	font-family: inherit;
 }
 
 button,
