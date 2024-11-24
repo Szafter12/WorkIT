@@ -1,9 +1,9 @@
 .logo {
-	padding: 0.8em 1.6em;
-	font-size: 1.8rem;
-	text-align: center;
-	color: var(--white-color);
-	border-radius: 0;
-	background-color: var(--secondary-color);
-	border-radius: 12px;
+	padding: 0.5em;
+	font-weight: 600;
+	letter-spacing: 1px;
+	background: linear-gradient(to right, #7077d1, #1c2cc2);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: clamp(2.5rem, 3vw, 3.4rem);
 }

@@ -18,7 +18,7 @@ export default function MainButton({ onClick, padding, icon, children }: MainBut
 			{children}
 			{icon && (
 				<span>
-					<img src={icon} alt='' />
+					<img width='15px' height='15px' src={icon} alt='' />
 				</span>
 			)}
 		</button>
