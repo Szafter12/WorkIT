@@ -1,0 +1,25 @@
+.loginPrev {
+	position: absolute;
+	left: -95%;
+	top: 60px;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	padding: 1em 1.3em;
+	width: 350px;
+	min-height: 200px;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+	background-color: var(--white-color);
+	border-radius: 12px;
+	text-align: left;
+}
+
+.loginPrev .main {
+	font-size: clamp(1.6rem, 3vw, 1.8rem);
+	font-weight: 600;
+}
+
+.loginPrev .text {
+	font-size: clamp(1.2rem, 3vw, 1.4rem);
+	line-height: 1.5;
+}
