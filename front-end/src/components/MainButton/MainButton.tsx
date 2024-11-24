@@ -4,17 +4,19 @@ import styles from './MainButton.module.scss'
 interface MainButtonProps {
 	onClick?: (event: React.MouseEvent<HTMLElement>) => void
 	padding?: string
-	rounded?: boolean
 	icon?: string
 	href?: string
 	fontSize?: string
+	bgc?: boolean
 	children: React.ReactNode
 }
 
-export default function MainButton({ onClick, padding, icon, children, href, fontSize }: MainButtonProps) {
+export default function MainButton({ onClick, padding, icon, children, href, fontSize, bgc }: MainButtonProps) {
 	const style = {
 		padding: padding || '1em 2em',
 		fontSize: fontSize || 'clamp(1.4rem,3vw,1.6rem)',
+		backgroundColor: bgc ? 'var(--main-color)' : 'none',
+		color: bgc ? 'var(--white-color)' : 'var(--text-color)',
 	}
 
 	if (href) {
