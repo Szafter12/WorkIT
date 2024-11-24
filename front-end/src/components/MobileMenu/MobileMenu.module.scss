@@ -1,0 +1,35 @@
+.mobileMenu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: var(--white-color);
+	transform: translateY(-100%);
+	min-height: 100%;
+	z-index: 900;
+	transition: transform 0.3s;
+
+	&__content {
+		margin-top: 80px;
+		padding: 2em 1em;
+	}
+}
+
+.active {
+	transform: translateY(0);
+}
+
+.loginPrev {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	border-top: 1px solid var(--text-color);
+	margin-top: 2em;
+	padding: 1em 1em;
+	text-align: left;
+
+	&__title {
+		font-size: 1.8rem;
+		font-weight: 600;
+	}
+}

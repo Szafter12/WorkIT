@@ -5,8 +5,9 @@
 	padding: 1em;
 	width: 100%;
 	text-align: center;
-	background-color: var(--main-color);
+	background: linear-gradient(to right, #5d66e2, #2b3ac5);
 	color: var(--white-color);
 	border-top-left-radius: 100%;
 	border-top-right-radius: 100%;
+	z-index: 999;
 }
