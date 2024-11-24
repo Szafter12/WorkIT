@@ -12,14 +12,14 @@
 	background-color: var(--white-color);
 	border-radius: 12px;
 	text-align: left;
-}
 
-.loginPrev .main {
-	font-size: clamp(1.6rem, 3vw, 1.8rem);
-	font-weight: 600;
-}
+	&__main {
+		font-size: clamp(1.6rem, 3vw, 1.8rem);
+		font-weight: 600;
+	}
 
-.loginPrev .text {
-	font-size: clamp(1.2rem, 3vw, 1.4rem);
-	line-height: 1.5;
+	&__text {
+		font-size: clamp(1.2rem, 3vw, 1.4rem);
+		line-height: 1.5;
+	}
 }

@@ -8,7 +8,7 @@ interface HeaderProps {
 export function Header({ children }: HeaderProps) {
 	return (
 		<header className={styles.header}>
-			<div className={styles.content}>{children}</div>
+			<div className={styles.header__content}>{children}</div>
 		</header>
 	)
 }

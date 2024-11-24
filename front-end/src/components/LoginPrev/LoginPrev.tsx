@@ -4,8 +4,8 @@ import styles from './LoginPrev.module.scss'
 export function LoginPrev() {
 	return (
 		<div className={styles.loginPrev}>
-			<p className={styles.main}>Witaj na Work IT!</p>
-			<p className={styles.text}>
+			<p className={styles.loginPrev__main}>Witaj na Work IT!</p>
+			<p className={styles.loginPrev__text}>
 				Zaloguj się i uzyskaj dostęp do szybkiego aplikowania, zapisanych ofert, zarządzania plikami CV i wielu innych
 				funkcji!
 			</p>
