@@ -1,7 +1,7 @@
-import MainButton from '../MainButton/MainButton'
+import { MainButton } from '../MainButton/MainButton'
 import styles from './LoginPrev.module.scss'
 
-export default function LoginPrev() {
+export function LoginPrev() {
 	return (
 		<div className={styles.loginPrev}>
 			<p className={styles.main}>Witaj na Work IT!</p>

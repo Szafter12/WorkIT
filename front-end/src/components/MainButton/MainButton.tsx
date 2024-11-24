@@ -11,7 +11,7 @@ interface MainButtonProps {
 	children: React.ReactNode
 }
 
-export default function MainButton({ onClick, padding, icon, children, href, fontSize, bgc }: MainButtonProps) {
+export function MainButton({ onClick, padding, icon, children, href, fontSize, bgc }: MainButtonProps) {
 	const style = {
 		padding: padding || '1em 2em',
 		fontSize: fontSize || 'clamp(1.4rem,3vw,1.6rem)',

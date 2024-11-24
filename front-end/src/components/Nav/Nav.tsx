@@ -2,7 +2,7 @@ import styles from './Nav.module.scss'
 import { NavLink } from 'react-router-dom'
 import { NAV_ITEMS } from '../../constants/navigation'
 
-export default function Nav() {
+export function Nav() {
 	return (
 		<nav className={styles.nav}>
 			<ul>
