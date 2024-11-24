@@ -55,9 +55,6 @@ export function Layout({ children }: LayoutProps) {
 			document.documentElement.style.overflowY = 'auto'
 			document.removeEventListener('touchmove', preventDefault)
 		}
-		if (!isMobile) {
-			setIsMobileShown(false)
-		}
 
 		return () => {
 			document.body.style.overflowY = 'auto'

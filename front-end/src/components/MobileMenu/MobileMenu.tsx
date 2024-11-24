@@ -12,7 +12,7 @@ export function MobileMenu({ isMobileShown }: MobileMenuProps) {
 			<div className={styles.mobileMenu__content}>
 				<Nav isMobile={true} />
 				<div className={styles.loginPrev}>
-					<p className={styles.loginPrev__title}>Logowanie</p>
+					<p className={styles.loginPrev__title}>Moje konto</p>
 					<MainButton href='/logowanie' fontSize='1.4rem' bgc={true}>
 						Zaloguj się
 					</MainButton>
