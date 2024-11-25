@@ -1,11 +1,11 @@
 import React from 'react'
-import styles from './Header.module.scss'
+import styles from './TopBar.module.scss'
 
 interface HeaderProps {
 	children: React.ReactNode
 }
 
-export function Header({ children }: HeaderProps) {
+export function TopBar({ children }: HeaderProps) {
 	return (
 		<header className={styles.header}>
 			<div className={styles.header__content}>{children}</div>

@@ -1,5 +1,5 @@
 import styles from './Layout.module.scss'
-import { Header } from '../Header/Header'
+import { TopBar } from '../TopBar/TopBar'
 import { Logo } from '../Logo/Logo'
 import { MainButton } from '../MainButton/MainButton'
 import { Nav } from '../Nav/Nav'
@@ -74,7 +74,7 @@ export function Layout({ children }: LayoutProps) {
 	return (
 		<>
 			<LayoutContent>
-				<Header>
+				<TopBar>
 					<Logo />
 					{!isMobile && <Nav />}
 					{!isMobile && (
@@ -86,7 +86,7 @@ export function Layout({ children }: LayoutProps) {
 						</div>
 					)}
 					{isMobile && <BurgerMenu onClick={handleMobileMenu} />}
-				</Header>
+				</TopBar>
 				<Main>{children}</Main>
 				<Footer />
 				{isMobile && <MobileMenu isMobileShown={isMobileShown} />}
