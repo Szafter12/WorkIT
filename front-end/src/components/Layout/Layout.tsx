@@ -79,7 +79,10 @@ export function Layout({ children }: LayoutProps) {
 					{!isMobile && <Nav />}
 					{!isMobile && (
 						<div className={styles.realtiveBtn}>
-							<MainButton icon={isLoginPrevShown ? ARROW_UP : ARROW} onClick={handleLoginPrevShown}>
+							<MainButton
+								fontSize='clamp(1.2rem,3vw,1.4rem)'
+								icon={isLoginPrevShown ? ARROW_UP : ARROW}
+								onClick={handleLoginPrevShown}>
 								Moje Konto
 							</MainButton>
 							{isLoginPrevShown && <LoginPrev />}
