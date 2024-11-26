@@ -1,0 +1,20 @@
+.smallBox {
+	display: flex;
+	align-items: center;
+	gap: 0.3em;
+	padding: 0.5em 1em;
+	font-size: 1.4rem;
+	border-radius: 30px;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	font-weight: 600;
+	color: rgba(0, 0, 0, 0.6);
+
+	img {
+		width: 15px;
+		height: 15px;
+	}
+
+	&:hover {
+		box-shadow: 0 0 3px rgba(57, 72, 207, 0.6);
+	}
+}
