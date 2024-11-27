@@ -5,14 +5,14 @@ import { SearchBar } from '../../components/SearchBar/SearchBar'
 import { useLoaderData } from 'react-router-dom'
 
 export function Home() {
-	const specializations = useLoaderData()
+	const {specializations, tech} = useLoaderData()
 
 	return (
 		<Layout>
 			<Header subHeading='od najlepszych pracodawców' img={IMG}>
 				5067 sprawdzonych ofert pracy
 			</Header>
-			<SearchBar specializations={specializations} />
+			<SearchBar tech={tech} specializations={specializations} />
 		</Layout>
 	)
 }

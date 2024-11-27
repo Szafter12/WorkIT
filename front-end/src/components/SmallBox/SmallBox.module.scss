@@ -8,6 +8,7 @@
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	font-weight: 600;
 	color: rgba(0, 0, 0, 0.6);
+	transition: box-shadow 0.3s, border-color 0.3s;
 
 	img {
 		width: 15px;
@@ -16,5 +17,6 @@
 
 	&:hover {
 		box-shadow: 0 0 3px rgba(57, 72, 207, 0.6);
+		border-color: var(--main-color);
 	}
 }

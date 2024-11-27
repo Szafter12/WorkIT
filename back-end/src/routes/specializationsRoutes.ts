@@ -5,4 +5,6 @@ const router = Router()
 
 router.get('/specializations', specializationsController.getSpecializations)
 
+router.get('/tech', specializationsController.getTech)
+
 export default router

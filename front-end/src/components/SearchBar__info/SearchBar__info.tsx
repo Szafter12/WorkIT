@@ -1,15 +1,16 @@
 import styles from './SearchBar__info.module.scss'
 import { SmallBox } from '../SmallBox/SmallBox'
 import { useState } from 'react'
-import { SearchBoxSpecializations } from '../../types/SearchBar'
+import { SearchBoxSpecializations, SearchBoxTech } from '../../types/SearchBar'
 
 interface infoProps {
 	specializations: SearchBoxSpecializations[]
+	tech: SearchBoxTech[]
 }
 
-export function SearchBar__info({ specializations }: infoProps) {
+export function SearchBar__info({ specializations, tech }: infoProps) {
 	const [visibleSpecializationCount, setVisibleSpecializationCount] = useState<number>(specializations.length)
-	const [visibleTechCount, setVisibleTechCount] = useState<number>(10)
+	const [visibleTechCount, setVisibleTechCount] = useState<number>(5)
 
 	function handleShowMoreSpecialization(): void {
 		setVisibleSpecializationCount(prev => (prev = specializations.length))
@@ -20,18 +21,18 @@ export function SearchBar__info({ specializations }: infoProps) {
 	}
 
 	function handleShowMoreTech(): void {
-		setVisibleTechCount(prev => (prev = specializations.length))
+		setVisibleTechCount(prev => (prev = tech.length))
 	}
 
 	function handleShowLessTech(): void {
-		setVisibleTechCount(prev => (prev = 10))
+		setVisibleTechCount(prev => (prev = 5))
 	}
 
 	return (
 		<div className={styles.searchBar__info}>
 			<h3>Specjalizacje</h3>
 			<div className={styles.filters}>
-				{specializations.map(el => {
+				{specializations.slice(0, visibleSpecializationCount).map(el => {
 					return (
 						<SmallBox arrow={false} key={el.specialization_id}>
 							{el.specialization}
@@ -50,14 +51,14 @@ export function SearchBar__info({ specializations }: infoProps) {
 			</div>
 			<h3>Popularne technologie</h3>
 			<div className={styles.filters}>
-				{specializations.map(el => {
+				{tech.slice(0, visibleTechCount).map(el => {
 					return (
-						<SmallBox arrow={false} key={el.specialization_id}>
-							{el.specialization}
+						<SmallBox arrow={false} key={el.ability_id}>
+							{el.ability_name}
 						</SmallBox>
 					)
 				})}
-				{visibleTechCount < specializations.length ? (
+				{visibleTechCount < tech.length ? (
 					<SmallBox arrow_pos='down' onClick={handleShowMoreTech} arrow={true}>
 						rozwiń
 					</SmallBox>
