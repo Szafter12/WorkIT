@@ -1,4 +1,4 @@
 export type SearchBoxSpecializations = {
-	id: number
-	name: string
+	specialization_id: number
+	specialization: string
 }

@@ -31,10 +31,10 @@ export function SearchBar__info({ specializations }: infoProps) {
 		<div className={styles.searchBar__info}>
 			<h3>Specjalizacje</h3>
 			<div className={styles.filters}>
-				{specializations.slice(0, visibleSpecializationCount).map(el => {
+				{specializations.map(el => {
 					return (
-						<SmallBox arrow={false} key={el.id}>
-							{el.name}
+						<SmallBox arrow={false} key={el.specialization_id}>
+							{el.specialization}
 						</SmallBox>
 					)
 				})}
@@ -50,10 +50,10 @@ export function SearchBar__info({ specializations }: infoProps) {
 			</div>
 			<h3>Popularne technologie</h3>
 			<div className={styles.filters}>
-				{specializations.slice(0, visibleTechCount).map(el => {
+				{specializations.map(el => {
 					return (
-						<SmallBox arrow={false} key={el.id}>
-							{el.name}
+						<SmallBox arrow={false} key={el.specialization_id}>
+							{el.specialization}
 						</SmallBox>
 					)
 				})}

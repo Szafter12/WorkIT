@@ -1,108 +1,13 @@
 import { SearchBar__info } from '../SearchBar__info/SearchBar__info'
 import styles from './SearchBar.module.scss'
-import { SearchBoxSpecializations } from '../../types/SearchBar'
 import { MainButton } from '../MainButton/MainButton'
+import { SearchBoxSpecializations } from '../../types/SearchBar'
 
-const specializations: SearchBoxSpecializations[] = [
-	{
-		id: 1,
-		name: 'DevOps',
-	},
-	{
-		id: 2,
-		name: 'DevOps',
-	},
-	{
-		id: 3,
-		name: 'DevOps',
-	},
-	{
-		id: 4,
-		name: 'DevOps',
-	},
-	{
-		id: 5,
-		name: 'DevOps',
-	},
-	{
-		id: 6,
-		name: 'DevOps',
-	},
-	{
-		id: 7,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-	{
-		id: 8,
-		name: 'DevOps',
-	},
-]
+interface SearchBarProps {
+	specializations: SearchBoxSpecializations[]
+}
 
-export function SearchBar() {
+export function SearchBar({ specializations }: SearchBarProps) {
 	return (
 		<div className={styles.searchBar}>
 			<div className={styles.inputContainer}>
