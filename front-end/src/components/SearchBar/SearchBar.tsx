@@ -2,6 +2,8 @@ import { SearchBar__info } from '../SearchBar__info/SearchBar__info'
 import styles from './SearchBar.module.scss'
 import { MainButton } from '../MainButton/MainButton'
 import { SearchBoxSpecializations, SearchBoxTech } from '../../types/SearchBar'
+import GLASS from '../../assets/icons/magnifying-glass.png'
+// import ARROW from '../../assets/icons/arrow.png'
 
 interface SearchBarProps {
 	specializations: SearchBoxSpecializations[]
@@ -17,7 +19,12 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 			</div>
 			<SearchBar__info tech={tech} specializations={specializations} />
 			<div className={styles.btnContainer}>
-				<MainButton bgc={true}>Szukaj</MainButton>
+				<div>
+					
+				</div>
+				<MainButton icon={GLASS} bgc={true}>
+					Szukaj
+				</MainButton>
 			</div>
 		</div>
 	)
