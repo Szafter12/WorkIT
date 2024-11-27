@@ -15,7 +15,16 @@
 
 	.btnContainer {
 		display: flex;
-		justify-content: flex-end;
+		justify-content: space-between;
+	}
+
+	.df {
+		display: flex;
+		gap: 1em;
+	}
+
+	.filterContainer {
+		position: relative;
 	}
 
 	h3 {
