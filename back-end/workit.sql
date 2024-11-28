@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lis 12, 2024 at 10:00 PM
+-- Generation Time: Lis 29, 2024 at 12:19 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -37,25 +37,39 @@ CREATE TABLE `abilities` (
 --
 
 INSERT INTO `abilities` (`ability_id`, `ability_name`) VALUES
-(1, 'JavaScript');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `category`
---
-
-CREATE TABLE `category` (
-  `category_id` int(11) NOT NULL,
-  `category` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
-
---
--- Dumping data for table `category`
---
-
-INSERT INTO `category` (`category_id`, `category`) VALUES
-(1, 'IT');
+(27, 'Assembly Language'),
+(31, 'AWS'),
+(32, 'Azure'),
+(6, 'C#'),
+(5, 'C++'),
+(12, 'CSS'),
+(20, 'Dart'),
+(29, 'Docker'),
+(30, 'Git'),
+(15, 'Go'),
+(33, 'Google Cloud'),
+(25, 'Haskell'),
+(11, 'HTML'),
+(4, 'Java'),
+(1, 'JavaScript'),
+(9, 'Kotlin'),
+(24, 'Lua'),
+(18, 'MATLAB'),
+(14, 'NoSQL'),
+(22, 'Objective-C'),
+(23, 'Perl'),
+(2, 'PHP'),
+(28, 'PowerShell'),
+(3, 'Python'),
+(17, 'R'),
+(7, 'Ruby'),
+(16, 'Rust'),
+(21, 'Scala'),
+(19, 'Shell Scripting'),
+(13, 'SQL'),
+(8, 'Swift'),
+(10, 'TypeScript'),
+(26, 'VHDL');
 
 -- --------------------------------------------------------
 
@@ -112,6 +126,13 @@ CREATE TABLE `companies` (
   `addition_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
+--
+-- Dumping data for table `companies`
+--
+
+INSERT INTO `companies` (`company_id`, `company_name`, `company_logo_url`, `phone`, `email`, `company_info`, `addition_date`) VALUES
+(4, 'test', 'test', '12421421', 'essa@mail.com', 'test', '2024-11-28 23:43:56');
+
 -- --------------------------------------------------------
 
 --
@@ -141,7 +162,12 @@ CREATE TABLE `contract_type` (
 --
 
 INSERT INTO `contract_type` (`contract_type_id`, `contract_name`) VALUES
-(1, 'B2B');
+(1, 'B2B'),
+(5, 'Kontrakt B2B'),
+(3, 'Umowa o dzieło'),
+(2, 'Umowa o pracę'),
+(6, 'Umowa o staż'),
+(4, 'Umowa zlecenie');
 
 -- --------------------------------------------------------
 
@@ -159,7 +185,11 @@ CREATE TABLE `job_level` (
 --
 
 INSERT INTO `job_level` (`level_id`, `level`) VALUES
-(1, 'Junior');
+(10, 'Ekspert'),
+(1, 'Junior'),
+(8, 'Mid'),
+(7, 'Praktykant'),
+(9, 'Senior');
 
 -- --------------------------------------------------------
 
@@ -222,6 +252,13 @@ CREATE TABLE `posts` (
   `work_dimension_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`post_id`, `company_id`, `job_title`, `level_id`, `contract_type_id`, `job_description`, `end_date`, `work_mode_id`, `addition_date`, `work_dimension_id`) VALUES
+(5, 4, 'Front-end developer kraków', 1, 5, 'test', '2024-11-30', 4, '2024-11-28 23:44:26', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -233,6 +270,16 @@ CREATE TABLE `post_ability` (
   `ability_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
+--
+-- Dumping data for table `post_ability`
+--
+
+INSERT INTO `post_ability` (`post_id`, `ability_id`) VALUES
+(5, 11),
+(5, 2),
+(5, 1),
+(5, 10);
+
 -- --------------------------------------------------------
 
 --
@@ -243,6 +290,14 @@ CREATE TABLE `post_specialization` (
   `post_id` int(11) NOT NULL,
   `specialization_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Dumping data for table `post_specialization`
+--
+
+INSERT INTO `post_specialization` (`post_id`, `specialization_id`) VALUES
+(5, 4),
+(5, 3);
 
 -- --------------------------------------------------------
 
@@ -260,8 +315,33 @@ CREATE TABLE `specializations` (
 --
 
 INSERT INTO `specializations` (`specialization_id`, `specialization`) VALUES
-(2, 'Backend'),
-(1, 'Frontend');
+(22, 'Artificial Intelligence Specialist'),
+(4, 'Back-end'),
+(23, 'Blockchain Developer'),
+(20, 'Business Intelligence Analyst'),
+(12, 'Cloud Engineer'),
+(24, 'Cybersecurity Analyst'),
+(21, 'Data Analyst'),
+(9, 'Data Scientist'),
+(8, 'Database Administrator'),
+(6, 'DevOps'),
+(15, 'Embedded Systems Engineer'),
+(3, 'Front-end'),
+(5, 'Full-stack'),
+(16, 'Game Developer'),
+(29, 'IT Consultant'),
+(28, 'IT Project Manager'),
+(19, 'IT Support Specialist'),
+(10, 'Machine Learning Engineer'),
+(14, 'Mobile App Developer'),
+(18, 'Network Administrator'),
+(27, 'Network Engineer'),
+(25, 'Quality Assurance Engineer'),
+(13, 'Security Specialist'),
+(11, 'Software Engineer'),
+(17, 'Systems Analyst'),
+(7, 'UI/UX Design'),
+(26, 'Web Developer');
 
 -- --------------------------------------------------------
 
@@ -379,7 +459,9 @@ CREATE TABLE `work_dimension` (
 --
 
 INSERT INTO `work_dimension` (`work_dimension_id`, `work_dimension_name`) VALUES
-(1, 'Pełny etat');
+(5, 'Część etatu'),
+(1, 'Pełny etat'),
+(6, 'Tymczasowa');
 
 -- --------------------------------------------------------
 
@@ -397,7 +479,9 @@ CREATE TABLE `work_mode` (
 --
 
 INSERT INTO `work_mode` (`work_mode_id`, `work_mode_name`) VALUES
-(1, 'Hybrydowo');
+(3, 'Praca hybrydowa'),
+(2, 'Praca stacjonarna'),
+(4, 'Praca zdalna');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -409,13 +493,6 @@ INSERT INTO `work_mode` (`work_mode_id`, `work_mode_name`) VALUES
 ALTER TABLE `abilities`
   ADD PRIMARY KEY (`ability_id`),
   ADD UNIQUE KEY `ability_name` (`ability_name`);
-
---
--- Indeksy dla tabeli `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`category_id`),
-  ADD UNIQUE KEY `category` (`category`);
 
 --
 -- Indeksy dla tabeli `city`
@@ -582,13 +659,7 @@ ALTER TABLE `work_mode`
 -- AUTO_INCREMENT for table `abilities`
 --
 ALTER TABLE `abilities`
-  MODIFY `ability_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ability_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `city`
@@ -600,7 +671,7 @@ ALTER TABLE `city`
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `company_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `company_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `company_address`
@@ -612,13 +683,13 @@ ALTER TABLE `company_address`
 -- AUTO_INCREMENT for table `contract_type`
 --
 ALTER TABLE `contract_type`
-  MODIFY `contract_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `contract_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `job_level`
 --
 ALTER TABLE `job_level`
-  MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `job_requirements`
@@ -642,13 +713,13 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `specializations`
 --
 ALTER TABLE `specializations`
-  MODIFY `specialization_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `specialization_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -684,13 +755,13 @@ ALTER TABLE `user_work`
 -- AUTO_INCREMENT for table `work_dimension`
 --
 ALTER TABLE `work_dimension`
-  MODIFY `work_dimension_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `work_dimension_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `work_mode`
 --
 ALTER TABLE `work_mode`
-  MODIFY `work_mode_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `work_mode_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
