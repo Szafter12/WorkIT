@@ -15,6 +15,7 @@ interface SearchBarProps {
 
 export function SearchBar({ specializations, tech }: SearchBarProps) {
 	const [currentFilterBox, setCurrentFilterBox] = useState('')
+	const [categories, setCategories] = useState<string[]>([])
 
 	function handleFilterBox(name: string) {
 		if (currentFilterBox === name) {
@@ -23,6 +24,14 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 			setCurrentFilterBox(prevState => (prevState = name))
 		}
 	}
+
+	const toggleCategory = (category: string) => {
+		setCategories(prevState => {
+			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+		})
+	}
+
+	
 
 	return (
 		<div className={styles.searchBar}>
@@ -42,7 +51,13 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 									onClick={() => handleFilterBox(el.name)}>
 									{el.name}
 								</FilterBtn>
-								{currentFilterBox === el.name && <FilterBox filterContent={el.filterContent} />}
+								{currentFilterBox === el.name && (
+									<FilterBox
+										categories={categories}
+										onChange={toggleCategory}
+										filterContent={el.filterContent}
+									/>
+								)}
 							</div>
 						)
 					})}
