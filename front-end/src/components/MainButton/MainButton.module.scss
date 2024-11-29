@@ -2,7 +2,9 @@
 	position: relative;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	gap: 0.5em;
+	width: 100%;
 	padding: 0.5em 1em;
 	text-align: center;
 	font-weight: 600;
@@ -11,5 +13,11 @@
 
 	&:hover {
 		border-radius: 12px;
+	}
+}
+
+@media (min-width: 1000px) {
+	.btn {
+		width: auto;
 	}
 }

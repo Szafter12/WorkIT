@@ -12,6 +12,7 @@ import { LayoutContent } from '../LayoutContent/LayoutContent'
 import { Main } from '../Main/Main'
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu'
 import { MobileMenu } from '../MobileMenu/MobileMenu'
+import { resize } from '../../hooks/resize'
 
 interface LayoutProps {
 	children: React.ReactNode
@@ -23,25 +24,7 @@ export function Layout({ children }: LayoutProps) {
 	const [isMobileShown, setIsMobileShown] = useState<boolean>(false)
 	const mobileSize = 850
 
-	useEffect(() => {
-		let timeoutId: any = null
-
-		const handleResize = () => {
-			clearTimeout(timeoutId)
-			timeoutId = setTimeout(() => {
-				setIsMobile(window.innerWidth < mobileSize)
-			}, 150)
-		}
-
-		handleResize()
-
-		window.addEventListener('resize', handleResize)
-
-		return () => {
-			clearTimeout(timeoutId)
-			window.removeEventListener('resize', handleResize)
-		}
-	}, [])
+	resize(mobileSize, setIsMobile)
 
 	useEffect(() => {
 		const preventDefault = (e: any) => e.preventDefault()

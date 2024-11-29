@@ -7,7 +7,8 @@ import { FilterBtn } from '../FilterBtn/FilterBtn'
 import { filters } from '../../constants/filters'
 import { FilterBox } from '../FilterBox/FilterBox'
 import { useState } from 'react'
-
+import { resize } from '../../hooks/resize'
+import ARROW from '../../assets/icons/arrow.png'
 interface SearchBarProps {
 	specializations: SearchBoxSpecializations[]
 	tech: SearchBoxTech[]
@@ -16,6 +17,11 @@ interface SearchBarProps {
 export function SearchBar({ specializations, tech }: SearchBarProps) {
 	const [currentFilterBox, setCurrentFilterBox] = useState('')
 	const [categories, setCategories] = useState<string[]>([])
+	const [isMobile, setIsMobile] = useState<boolean>(false)
+	const [isFilterMenuShown, setIsFilterMenuShown] = useState<boolean>(false)
+	const mobileSize = 1000
+
+	resize(mobileSize, setIsMobile)
 
 	function handleFilterBox(name: string) {
 		if (currentFilterBox === name) {
@@ -31,7 +37,9 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 		})
 	}
 
-	console.log(categories)
+	const handleFilterMenu = () => {
+		setIsFilterMenuShown(true)
+	}
 
 	return (
 		<div className={styles.searchBar}>
@@ -39,26 +47,43 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 				<input type='text' placeholder='Stanowisko, firma, słowo kluczowe' />
 				<input type='text' placeholder='Lokalizacja' />
 			</div>
-			<SearchBar__info categories={categories} onClick={toggleCategory} tech={tech} specializations={specializations} />
+			{!isMobile && (
+				<SearchBar__info
+					categories={categories}
+					onClick={toggleCategory}
+					tech={tech}
+					specializations={specializations}
+				/>
+			)}
 			{categories.length > 0 && <p>Aktywne filtry: {categories.length}</p>}
 			<div className={styles.btnContainer}>
-				<div className={styles.df}>
-					{filters.map(el => {
-						return (
-							<div className={styles.filterContainer}>
-								<FilterBtn
-									key={el.name}
-									arrow={currentFilterBox === el.name ? false : true}
-									onClick={() => handleFilterBox(el.name)}>
-									{el.name}
-								</FilterBtn>
-								{currentFilterBox === el.name && (
-									<FilterBox categories={categories} onChange={toggleCategory} filterContent={el.filterContent} />
-								)}
-							</div>
-						)
-					})}
-				</div>
+				{!isMobile && (
+					<div className={styles.df}>
+						{filters.map(el => {
+							return (
+								<div className={styles.filterContainer}>
+									<FilterBtn
+										key={el.name}
+										arrow={currentFilterBox === el.name ? false : true}
+										onClick={() => handleFilterBox(el.name)}>
+										{el.name}
+									</FilterBtn>
+									{currentFilterBox === el.name && (
+										<FilterBox categories={categories} onChange={toggleCategory} filterContent={el.filterContent} />
+									)}
+								</div>
+							)
+						})}
+					</div>
+				)}
+				{isMobile && (
+					<div className={styles.filterButton}>
+						<MainButton onClick={handleFilterMenu} bgc={false} icon={ARROW}>
+							Filtry
+						</MainButton>
+					</div>
+				)}
+				{isMobile && isFilterMenuShown && <div>essa</div>}
 				<MainButton icon={GLASS} bgc={true}>
 					Szukaj
 				</MainButton>

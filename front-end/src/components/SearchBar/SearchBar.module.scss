@@ -10,12 +10,13 @@
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
-		gap: 0.3em;
+		gap: 1.5em;
 	}
 
 	.btnContainer {
 		display: flex;
 		justify-content: space-between;
+		flex-direction: column;
 	}
 
 	.df {
@@ -25,6 +26,11 @@
 
 	.filterContainer {
 		position: relative;
+	}
+
+	.filterButton {
+		width: 100%;
+		margin: 1em 0;
 	}
 
 	h3 {
@@ -45,9 +51,13 @@
 	}
 }
 
-@media (min-width: 800px) {
+@media (min-width: 1000px) {
 	.searchBar {
 		.inputContainer {
+			flex-direction: row;
+			gap: 0.5em;
+		}
+		.btnContainer {
 			flex-direction: row;
 		}
 	}

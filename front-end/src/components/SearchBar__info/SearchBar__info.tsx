@@ -11,7 +11,7 @@ interface infoProps {
 }
 
 export function SearchBar__info({ specializations, tech, onClick, categories }: infoProps) {
-	const [visibleSpecializationCount, setVisibleSpecializationCount] = useState<number>(specializations.length)
+	const [visibleSpecializationCount, setVisibleSpecializationCount] = useState<number>(15)
 	const [visibleTechCount, setVisibleTechCount] = useState<number>(5)
 
 	function handleShowMoreSpecialization(): void {
