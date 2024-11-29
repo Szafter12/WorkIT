@@ -31,7 +31,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 		})
 	}
 
-	
+	console.log(categories)
 
 	return (
 		<div className={styles.searchBar}>
@@ -39,24 +39,21 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 				<input type='text' placeholder='Stanowisko, firma, słowo kluczowe' />
 				<input type='text' placeholder='Lokalizacja' />
 			</div>
-			<SearchBar__info tech={tech} specializations={specializations} />
+			<SearchBar__info categories={categories} onClick={toggleCategory} tech={tech} specializations={specializations} />
+			{categories.length > 0 && <p>Aktywne filtry: {categories.length}</p>}
 			<div className={styles.btnContainer}>
 				<div className={styles.df}>
 					{filters.map(el => {
 						return (
 							<div className={styles.filterContainer}>
 								<FilterBtn
-									arrow={currentFilterBox === el.name ? false : true}
 									key={el.name}
+									arrow={currentFilterBox === el.name ? false : true}
 									onClick={() => handleFilterBox(el.name)}>
 									{el.name}
 								</FilterBtn>
 								{currentFilterBox === el.name && (
-									<FilterBox
-										categories={categories}
-										onChange={toggleCategory}
-										filterContent={el.filterContent}
-									/>
+									<FilterBox categories={categories} onChange={toggleCategory} filterContent={el.filterContent} />
 								)}
 							</div>
 						)

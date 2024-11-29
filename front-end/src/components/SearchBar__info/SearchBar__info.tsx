@@ -6,9 +6,11 @@ import { SearchBoxSpecializations, SearchBoxTech } from '../../types/SearchBar'
 interface infoProps {
 	specializations: SearchBoxSpecializations[]
 	tech: SearchBoxTech[]
+	onClick: (category: string) => void
+	categories: string[]
 }
 
-export function SearchBar__info({ specializations, tech }: infoProps) {
+export function SearchBar__info({ specializations, tech, onClick, categories }: infoProps) {
 	const [visibleSpecializationCount, setVisibleSpecializationCount] = useState<number>(specializations.length)
 	const [visibleTechCount, setVisibleTechCount] = useState<number>(5)
 
@@ -34,38 +36,38 @@ export function SearchBar__info({ specializations, tech }: infoProps) {
 			<div className={styles.filters}>
 				{specializations.slice(0, visibleSpecializationCount).map(el => {
 					return (
-						<SmallBox arrow={false} key={el.specialization_id}>
-							{el.specialization}
-						</SmallBox>
+						<SmallBox
+							categories={categories}
+							toggleCategory={onClick}
+							arrow={false}
+							key={el.specialization_id}
+							name={el.specialization}
+						/>
 					)
 				})}
 				{visibleSpecializationCount < specializations.length ? (
-					<SmallBox arrow_pos='down' onClick={handleShowMoreSpecialization} arrow={true}>
-						rozwiń
-					</SmallBox>
+					<SmallBox name='rozwiń' arrow_pos='down' onClick={handleShowMoreSpecialization} arrow={true} />
 				) : (
-					<SmallBox arrow_pos='up' onClick={handleShowLessSpecialization} arrow={true}>
-						zwiń
-					</SmallBox>
+					<SmallBox name='zwiń' arrow_pos='up' onClick={handleShowLessSpecialization} arrow={true} />
 				)}
 			</div>
 			<h3>Popularne technologie</h3>
 			<div className={styles.filters}>
 				{tech.slice(0, visibleTechCount).map(el => {
 					return (
-						<SmallBox arrow={false} key={el.ability_id}>
-							{el.ability_name}
-						</SmallBox>
+						<SmallBox
+							name={el.ability_name}
+							categories={categories}
+							toggleCategory={onClick}
+							arrow={false}
+							key={el.ability_id}
+						/>
 					)
 				})}
 				{visibleTechCount < tech.length ? (
-					<SmallBox arrow_pos='down' onClick={handleShowMoreTech} arrow={true}>
-						rozwiń
-					</SmallBox>
+					<SmallBox name='rozwiń' arrow_pos='down' onClick={handleShowMoreTech} arrow={true} />
 				) : (
-					<SmallBox arrow_pos='up' onClick={handleShowLessTech} arrow={true}>
-						zwiń
-					</SmallBox>
+					<SmallBox name='zwiń' arrow_pos='up' onClick={handleShowLessTech} arrow={true} />
 				)}
 			</div>
 		</div>
