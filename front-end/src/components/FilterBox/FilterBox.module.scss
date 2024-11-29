@@ -2,15 +2,48 @@
 	position: absolute;
 	left: 0;
 	bottom: -320px;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
 	padding: 1em;
 	width: 230px;
 	min-height: 300px;
 	background-color: var(--white-color);
 	border-radius: 12px;
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.33);
+
+	input {
+		width: 15px;
+		&:focus {
+			outline: none;
+		}
+	}
+
+	label {
+		pointer-events: none;
+	}
+
+	&__content {
+		padding: 0.5em 1em;
+		display: flex;
+		font-weight: 500;
+		gap: 0.5em;
+		align-items: center;
+		border: 1px solid var(--main-color);
+		border-radius: 22px;
+		transition: background-color 0.3s;
+
+		&:hover {
+			background-color: rgba(72, 85, 198, 0.2);
+		}
+	}
+}
+
+.filterBoxMobile {
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
+	margin: 0.5em 0;
 
 	input {
 		width: 15px;

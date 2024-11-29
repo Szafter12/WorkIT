@@ -8,11 +8,14 @@ interface FilterBoxProps {
 	filterContent: FilterBox[]
 	onChange: (category: string) => void
 	categories: string[]
+	isMobile?: boolean
 }
 
-export const FilterBox = ({ filterContent, onChange, categories }: FilterBoxProps) => {
+export const FilterBox = ({ filterContent, onChange, categories, isMobile }: FilterBoxProps) => {
+	const styledClass = isMobile ? styles.filterBoxMobile : styles.filterBox
+
 	return (
-		<div className={styles.filterBox}>
+		<div className={styledClass}>
 			{filterContent.map(el => {
 				return (
 					<button onClick={() => onChange(el.filter_name)} key={el.filter_name} className={styles.filterBox__content}>

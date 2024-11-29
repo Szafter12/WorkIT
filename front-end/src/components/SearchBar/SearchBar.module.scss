@@ -49,6 +49,10 @@
 	input:focus {
 		outline: 2px solid var(--main-color);
 	}
+
+	.activeFilters {
+		margin: 1em 0;
+	}
 }
 
 @media (min-width: 1000px) {

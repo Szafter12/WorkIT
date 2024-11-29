@@ -9,6 +9,7 @@ import { FilterBox } from '../FilterBox/FilterBox'
 import { useState } from 'react'
 import { resize } from '../../hooks/resize'
 import ARROW from '../../assets/icons/arrow.png'
+import { FiltersMobile } from '../FiltersMobile/FiltersMobile'
 interface SearchBarProps {
 	specializations: SearchBoxSpecializations[]
 	tech: SearchBoxTech[]
@@ -55,7 +56,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 					specializations={specializations}
 				/>
 			)}
-			{categories.length > 0 && <p>Aktywne filtry: {categories.length}</p>}
+			{categories.length > 0 && <p className={styles.activeFilters}>Aktywne filtry: {categories.length}</p>}
 			<div className={styles.btnContainer}>
 				{!isMobile && (
 					<div className={styles.df}>
@@ -83,7 +84,15 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 						</MainButton>
 					</div>
 				)}
-				{isMobile && isFilterMenuShown && <div>essa</div>}
+				{isMobile && isFilterMenuShown && (
+					<FiltersMobile
+						specializations={specializations}
+						tech={tech}
+						setIsFilterMenuShown={setIsFilterMenuShown}
+						categories={categories}
+						toggleCategory={toggleCategory}
+					/>
+				)}
 				<MainButton icon={GLASS} bgc={true}>
 					Szukaj
 				</MainButton>

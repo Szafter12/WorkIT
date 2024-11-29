@@ -6,12 +6,12 @@ import { SearchBoxSpecializations, SearchBoxTech } from '../../types/SearchBar'
 interface infoProps {
 	specializations: SearchBoxSpecializations[]
 	tech: SearchBoxTech[]
-	onClick: (category: string) => void
-	categories: string[]
+	onClick?: (category: string) => void
+	categories?: string[]
 }
 
 export function SearchBar__info({ specializations, tech, onClick, categories }: infoProps) {
-	const [visibleSpecializationCount, setVisibleSpecializationCount] = useState<number>(15)
+	const [visibleSpecializationCount, setVisibleSpecializationCount] = useState<number>(10)
 	const [visibleTechCount, setVisibleTechCount] = useState<number>(5)
 
 	function handleShowMoreSpecialization(): void {

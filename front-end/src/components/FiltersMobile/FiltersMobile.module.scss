@@ -1,0 +1,26 @@
+.filtersMobile {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 80px 1em;
+	width: 100%;
+	height: 100%;
+	background-color: var(--white-color);
+	z-index: 900;
+	overflow-y: auto;
+
+	.closeBtn {
+		margin: 1em 0;
+		padding: 0.5em;
+	}
+
+	.activeFiltersContainer {
+		display: flex;
+		gap: 0.5em;
+		flex-wrap: wrap;
+	}
+
+	.activeFilters {
+		margin: 1em 0;
+	}
+}
