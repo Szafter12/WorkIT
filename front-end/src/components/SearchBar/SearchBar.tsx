@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { resize } from '../../hooks/resize'
 import ARROW from '../../assets/icons/arrow.png'
 import { FiltersMobile } from '../FiltersMobile/FiltersMobile'
+
 interface SearchBarProps {
 	specializations: SearchBoxSpecializations[]
 	tech: SearchBoxTech[]
@@ -31,6 +32,8 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 			setCurrentFilterBox(prevState => (prevState = name))
 		}
 	}
+
+	console.log(categories)
 
 	const toggleCategory = (category: string) => {
 		setCategories(prevState => {
