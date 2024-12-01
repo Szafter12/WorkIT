@@ -6,11 +6,18 @@ import { SearchBoxSpecializations, SearchBoxTech } from '../../types/SearchBar'
 interface infoProps {
 	specializations: SearchBoxSpecializations[]
 	tech: SearchBoxTech[]
-	onClick?: (category: string) => void
+	toggleSpecializationsCategory?: (category: string) => void
+	toggleTechCategory?: (category: string) => void
 	activeCategories?: string[]
 }
 
-export function SearchBar__info({ specializations, tech, onClick, activeCategories }: infoProps) {
+export function SearchBar__info({
+	specializations,
+	tech,
+	toggleSpecializationsCategory,
+	toggleTechCategory,
+	activeCategories,
+}: infoProps) {
 	const [visibleSpecializationCount, setVisibleSpecializationCount] = useState<number>(10)
 	const [visibleTechCount, setVisibleTechCount] = useState<number>(5)
 
@@ -38,7 +45,7 @@ export function SearchBar__info({ specializations, tech, onClick, activeCategori
 					return (
 						<SmallBox
 							activeCategories={activeCategories}
-							toggleCategory={onClick}
+							toggleCategory={toggleSpecializationsCategory}
 							arrow={false}
 							key={el.specialization_id}
 							name={el.specialization}
@@ -58,7 +65,7 @@ export function SearchBar__info({ specializations, tech, onClick, activeCategori
 						<SmallBox
 							name={el.ability_name}
 							activeCategories={activeCategories}
-							toggleCategory={onClick}
+							toggleCategory={toggleTechCategory}
 							arrow={false}
 							key={el.ability_id}
 						/>

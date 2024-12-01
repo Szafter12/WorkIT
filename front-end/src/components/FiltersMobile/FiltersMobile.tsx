@@ -11,7 +11,12 @@ interface filtersMobileProps {
 	tech: SearchBoxTech[]
 	setIsFilterMenuShown: (state: boolean) => void
 	activeCategories: string[]
-	toggleCategory: (category: string) => void
+	toggleSpecializationsCategory?: (category: string) => void
+	toggleTechCategory: (category: string) => void
+	toggleLvlCategory: (category: string) => void
+	toggleContractCategory: (category: string) => void
+	toggleDimensionCategory: (category: string) => void
+	toggleModeCategory: (category: string) => void
 }
 
 export function FiltersMobile({
@@ -19,8 +24,33 @@ export function FiltersMobile({
 	tech,
 	setIsFilterMenuShown,
 	activeCategories,
-	toggleCategory,
+	toggleSpecializationsCategory,
+	toggleTechCategory,
+	toggleLvlCategory,
+	toggleContractCategory,
+	toggleDimensionCategory,
+	toggleModeCategory,
 }: filtersMobileProps) {
+	let testFun: (category: string) => void
+
+	const setFilterFun = (name: string) => {
+		switch (name) {
+			case 'Poziom stanowiska':
+				testFun = toggleLvlCategory
+				break
+
+			case 'Rodzaj umowy':
+				testFun = toggleContractCategory
+				break
+			case 'Wymiar pracy':
+				testFun = toggleDimensionCategory
+				break
+			case 'Tryb pracy':
+				testFun = toggleModeCategory
+				break
+		}
+	}
+
 	return (
 		<div className={styles.filtersMobile}>
 			<button onClick={() => setIsFilterMenuShown(false)}>
@@ -31,13 +61,20 @@ export function FiltersMobile({
 					<h3 className={styles.activeFilters}>Aktywne filtry: {activeCategories.length}</h3>
 					<div className={styles.activeFiltersContainer}>
 						{activeCategories.map(el => {
-							return <SmallBox name={el} arrow={false} activeCategories={activeCategories} toggleCategory={toggleCategory} />
+							return <SmallBox name={el} arrow={false} activeCategories={activeCategories} />
 						})}
 					</div>
 				</div>
 			)}
-			<SearchBar__info specializations={specializations} tech={tech} activeCategories={activeCategories} onClick={toggleCategory} />
+			<SearchBar__info
+				specializations={specializations}
+				tech={tech}
+				activeCategories={activeCategories}
+				toggleSpecializationsCategory={toggleSpecializationsCategory}
+				toggleTechCategory={toggleTechCategory}
+			/>
 			{filters.map(el => {
+				setFilterFun(el.name)
 				return (
 					<div>
 						<h3>{el.name}</h3>
@@ -46,8 +83,8 @@ export function FiltersMobile({
 								<FilterBox
 									filterContent={el.filterContent}
 									activeCategories={activeCategories}
-									onChange={toggleCategory}
 									isMobile={true}
+									onChange={testFun}
 								/>
 							}
 						</div>

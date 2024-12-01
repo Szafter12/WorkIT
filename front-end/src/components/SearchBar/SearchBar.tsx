@@ -6,7 +6,7 @@ import GLASS from '../../assets/icons/magnifying-glass.png'
 import { FilterBtn } from '../FilterBtn/FilterBtn'
 import { filters } from '../../constants/filters'
 import { FilterBox } from '../FilterBox/FilterBox'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { resize } from '../../hooks/resize'
 import ARROW from '../../assets/icons/arrow.png'
 import { FiltersMobile } from '../FiltersMobile/FiltersMobile'
@@ -20,11 +20,55 @@ interface SearchBarProps {
 export function SearchBar({ specializations, tech }: SearchBarProps) {
 	const [currentFilterBox, setCurrentFilterBox] = useState('')
 	const [activeCategories, setactiveCategories] = useState<string[]>([])
+	const [techCategories, setTechCategories] = useState<string[]>([])
+	const [specializationsCategories, setSpecializationsCategories] = useState<string[]>([])
+	const [lvlCategories, setLvlCategories] = useState<string[]>([])
+	const [contractCategories, setContractCategories] = useState<string[]>([])
+	const [dimensionCategories, setDimensionCategories] = useState<string[]>([])
+	const [modeCategories, setModeCategories] = useState<string[]>([])
 	const [isMobile, setIsMobile] = useState<boolean>(false)
 	const [isFilterMenuShown, setIsFilterMenuShown] = useState<boolean>(false)
 	const mobileSize = 1000
-
+	let testFun: (category: string) => void
 	resize(mobileSize, setIsMobile)
+
+	const sendFiltersToBackend = () => {
+		const filters = {
+			techCategories,
+			specializationsCategories,
+			lvlCategories,
+			contractCategories,
+			dimensionCategories,
+			modeCategories,
+		}
+
+		// Filtruj puste tablice
+		const nonEmptyFilters = Object.entries(filters).reduce(
+			(acc, [key, value]) => (value.length ? { ...acc, [key]: value } : acc),
+			{}
+		)
+
+		if (Object.keys(nonEmptyFilters).length > 0) {
+			fetch('/api/filters', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(nonEmptyFilters),
+			})
+		}
+	}
+
+	useEffect(() => {
+		sendFiltersToBackend()
+	}, [
+		techCategories,
+		specializationsCategories,
+		lvlCategories,
+		contractCategories,
+		dimensionCategories,
+		modeCategories,
+	])
 
 	function handleFilterBox(name: string) {
 		if (currentFilterBox === name) {
@@ -34,14 +78,74 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 		}
 	}
 
-	const toggleCategory = (category: string) => {
+	const toggleActiveCategory = (category: string) => {
 		setactiveCategories(prevState => {
 			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
 		})
 	}
 
+	const toggleTechCategory = (category: string) => {
+		setTechCategories(prevState => {
+			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+		})
+		toggleActiveCategory(category)
+	}
+
+	const toggleSpecializationsCategory = (category: string) => {
+		setSpecializationsCategories(prevState => {
+			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+		})
+		toggleActiveCategory(category)
+	}
+
+	const toggleLvlCategory = (category: string) => {
+		setLvlCategories(prevState => {
+			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+		})
+		toggleActiveCategory(category)
+	}
+
+	const toggleContractCategory = (category: string) => {
+		setContractCategories(prevState => {
+			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+		})
+		toggleActiveCategory(category)
+	}
+
+	const toggleDimensionCategory = (category: string) => {
+		setDimensionCategories(prevState => {
+			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+		})
+		toggleActiveCategory(category)
+	}
+
+	const toggleModeCategory = (category: string) => {
+		setModeCategories(prevState => {
+			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+		})
+		toggleActiveCategory(category)
+	}
+
 	const handleFilterMenu = () => {
 		setIsFilterMenuShown(true)
+	}
+
+	const setFilterFun = (name: string) => {
+		switch (name) {
+			case 'Poziom stanowiska':
+				testFun = toggleLvlCategory
+				break
+
+			case 'Rodzaj umowy':
+				testFun = toggleContractCategory
+				break
+			case 'Wymiar pracy':
+				testFun = toggleDimensionCategory
+				break
+			case 'Tryb pracy':
+				testFun = toggleModeCategory
+				break
+		}
 	}
 
 	return (
@@ -53,9 +157,10 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 			{!isMobile && (
 				<SearchBar__info
 					activeCategories={activeCategories}
-					onClick={toggleCategory}
 					tech={tech}
 					specializations={specializations}
+					toggleTechCategory={toggleTechCategory}
+					toggleSpecializationsCategory={toggleSpecializationsCategory}
 				/>
 			)}
 			{activeCategories.length > 0 && (
@@ -63,7 +168,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 					<p>Aktywne filtry: {activeCategories.length}</p>
 					<div>
 						{activeCategories.map(el => {
-							return <SmallBox name={el} arrow={false} toggleCategory={toggleCategory} />
+							return <SmallBox name={el} arrow={false} />
 						})}
 					</div>
 				</div>
@@ -72,6 +177,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 				{!isMobile && (
 					<div className={styles.df}>
 						{filters.map(el => {
+							setFilterFun(el.name)
 							return (
 								<div className={styles.filterContainer}>
 									<FilterBtn
@@ -81,7 +187,11 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 										{el.name}
 									</FilterBtn>
 									{currentFilterBox === el.name && (
-										<FilterBox activeCategories={activeCategories} onChange={toggleCategory} filterContent={el.filterContent} />
+										<FilterBox
+											activeCategories={activeCategories}
+											onChange={testFun}
+											filterContent={el.filterContent}
+										/>
 									)}
 								</div>
 							)
@@ -101,7 +211,12 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 						tech={tech}
 						setIsFilterMenuShown={setIsFilterMenuShown}
 						activeCategories={activeCategories}
-						toggleCategory={toggleCategory}
+						toggleLvlCategory={toggleLvlCategory}
+						toggleContractCategory={toggleContractCategory}
+						toggleDimensionCategory={toggleDimensionCategory}
+						toggleModeCategory={toggleModeCategory}
+						toggleSpecializationsCategory={toggleSpecializationsCategory}
+						toggleTechCategory={toggleTechCategory}
 					/>
 				)}
 				<MainButton icon={GLASS} bgc={true}>
