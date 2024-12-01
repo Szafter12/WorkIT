@@ -19,7 +19,7 @@ interface SearchBarProps {
 
 export function SearchBar({ specializations, tech }: SearchBarProps) {
 	const [currentFilterBox, setCurrentFilterBox] = useState('')
-	const [categories, setCategories] = useState<string[]>([])
+	const [activeCategories, setactiveCategories] = useState<string[]>([])
 	const [isMobile, setIsMobile] = useState<boolean>(false)
 	const [isFilterMenuShown, setIsFilterMenuShown] = useState<boolean>(false)
 	const mobileSize = 1000
@@ -35,7 +35,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 	}
 
 	const toggleCategory = (category: string) => {
-		setCategories(prevState => {
+		setactiveCategories(prevState => {
 			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
 		})
 	}
@@ -52,17 +52,17 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 			</div>
 			{!isMobile && (
 				<SearchBar__info
-					categories={categories}
+					activeCategories={activeCategories}
 					onClick={toggleCategory}
 					tech={tech}
 					specializations={specializations}
 				/>
 			)}
-			{categories.length > 0 && (
+			{activeCategories.length > 0 && (
 				<div className={styles.activeFilters}>
-					<p>Aktywne filtry: {categories.length}</p>
+					<p>Aktywne filtry: {activeCategories.length}</p>
 					<div>
-						{categories.map(el => {
+						{activeCategories.map(el => {
 							return <SmallBox name={el} arrow={false} toggleCategory={toggleCategory} />
 						})}
 					</div>
@@ -81,7 +81,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 										{el.name}
 									</FilterBtn>
 									{currentFilterBox === el.name && (
-										<FilterBox categories={categories} onChange={toggleCategory} filterContent={el.filterContent} />
+										<FilterBox activeCategories={activeCategories} onChange={toggleCategory} filterContent={el.filterContent} />
 									)}
 								</div>
 							)
@@ -100,7 +100,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 						specializations={specializations}
 						tech={tech}
 						setIsFilterMenuShown={setIsFilterMenuShown}
-						categories={categories}
+						activeCategories={activeCategories}
 						toggleCategory={toggleCategory}
 					/>
 				)}

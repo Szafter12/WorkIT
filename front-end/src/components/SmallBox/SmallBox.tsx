@@ -10,16 +10,16 @@ interface smallBoxProps {
 	arrow_pos?: ArrowDirection
 	onClick?: () => void
 	toggleCategory?: (category: string) => void
-	categories?: string[]
+	activeCategories?: string[]
 }
 
-export function SmallBox({ name, arrow, onClick, arrow_pos, categories, toggleCategory }: smallBoxProps) {
+export function SmallBox({ name, arrow, onClick, arrow_pos, activeCategories, toggleCategory }: smallBoxProps) {
 	const styl = {
 		boxShadow: '0 0 3px rgba(57, 72, 207, 0.6)',
 		borderColor: 'var(--main-color)',
 	}
 
-	const isClicked = categories?.find(el => el === name)
+	const isClicked = activeCategories?.find(el => el === name)
 
 	return (
 		<button

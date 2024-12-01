@@ -7,11 +7,11 @@ type FilterBox = {
 interface FilterBoxProps {
 	filterContent: FilterBox[]
 	onChange: (category: string) => void
-	categories: string[]
+	activeCategories: string[]
 	isMobile?: boolean
 }
 
-export const FilterBox = ({ filterContent, onChange, categories, isMobile }: FilterBoxProps) => {
+export const FilterBox = ({ filterContent, onChange, activeCategories, isMobile }: FilterBoxProps) => {
 	const styledClass = isMobile ? styles.filterBoxMobile : styles.filterBox
 
 	return (
@@ -23,7 +23,7 @@ export const FilterBox = ({ filterContent, onChange, categories, isMobile }: Fil
 							type='checkbox'
 							id={el.filter_name}
 							value={el.filter_name}
-							checked={categories.includes(el.filter_name)}
+							checked={activeCategories.includes(el.filter_name)}
 						/>
 						<label htmlFor={el.filter_name}>{el.filter_name}</label>
 					</button>

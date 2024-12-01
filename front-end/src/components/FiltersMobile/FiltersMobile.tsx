@@ -10,7 +10,7 @@ interface filtersMobileProps {
 	specializations: SearchBoxSpecializations[]
 	tech: SearchBoxTech[]
 	setIsFilterMenuShown: (state: boolean) => void
-	categories: string[]
+	activeCategories: string[]
 	toggleCategory: (category: string) => void
 }
 
@@ -18,7 +18,7 @@ export function FiltersMobile({
 	specializations,
 	tech,
 	setIsFilterMenuShown,
-	categories,
+	activeCategories,
 	toggleCategory,
 }: filtersMobileProps) {
 	return (
@@ -26,17 +26,17 @@ export function FiltersMobile({
 			<button onClick={() => setIsFilterMenuShown(false)}>
 				<img className={styles.closeBtn} src={CLOSE} alt='' />
 			</button>
-			{categories.length > 0 && (
+			{activeCategories.length > 0 && (
 				<div>
-					<h3 className={styles.activeFilters}>Aktywne filtry: {categories.length}</h3>
+					<h3 className={styles.activeFilters}>Aktywne filtry: {activeCategories.length}</h3>
 					<div className={styles.activeFiltersContainer}>
-						{categories.map(el => {
-							return <SmallBox name={el} arrow={false} categories={categories} toggleCategory={toggleCategory} />
+						{activeCategories.map(el => {
+							return <SmallBox name={el} arrow={false} activeCategories={activeCategories} toggleCategory={toggleCategory} />
 						})}
 					</div>
 				</div>
 			)}
-			<SearchBar__info specializations={specializations} tech={tech} categories={categories} onClick={toggleCategory} />
+			<SearchBar__info specializations={specializations} tech={tech} activeCategories={activeCategories} onClick={toggleCategory} />
 			{filters.map(el => {
 				return (
 					<div>
@@ -45,7 +45,7 @@ export function FiltersMobile({
 							{
 								<FilterBox
 									filterContent={el.filterContent}
-									categories={categories}
+									activeCategories={activeCategories}
 									onChange={toggleCategory}
 									isMobile={true}
 								/>

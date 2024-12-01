@@ -7,10 +7,10 @@ interface infoProps {
 	specializations: SearchBoxSpecializations[]
 	tech: SearchBoxTech[]
 	onClick?: (category: string) => void
-	categories?: string[]
+	activeCategories?: string[]
 }
 
-export function SearchBar__info({ specializations, tech, onClick, categories }: infoProps) {
+export function SearchBar__info({ specializations, tech, onClick, activeCategories }: infoProps) {
 	const [visibleSpecializationCount, setVisibleSpecializationCount] = useState<number>(10)
 	const [visibleTechCount, setVisibleTechCount] = useState<number>(5)
 
@@ -37,7 +37,7 @@ export function SearchBar__info({ specializations, tech, onClick, categories }: 
 				{specializations.slice(0, visibleSpecializationCount).map(el => {
 					return (
 						<SmallBox
-							categories={categories}
+							activeCategories={activeCategories}
 							toggleCategory={onClick}
 							arrow={false}
 							key={el.specialization_id}
@@ -57,7 +57,7 @@ export function SearchBar__info({ specializations, tech, onClick, categories }: 
 					return (
 						<SmallBox
 							name={el.ability_name}
-							categories={categories}
+							activeCategories={activeCategories}
 							toggleCategory={onClick}
 							arrow={false}
 							key={el.ability_id}
