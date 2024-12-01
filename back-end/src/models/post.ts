@@ -3,7 +3,7 @@ import { Filters } from '../types/filters'
 
 export const buildQuery = async (filters: Filters): Promise<any> => {
 	let sql = `
-      SELECT COUNT(job_title)
+      SELECT DISTINCT job_title
       FROM posts
     `
 	const joins: string[] = []
@@ -50,6 +50,11 @@ export const buildQuery = async (filters: Filters): Promise<any> => {
 		const placeholders = filters.modeCategories.map(() => '?').join(', ')
 		conditions.push(`work_mode.work_mode_name IN (${placeholders})`)
 		values.push(...filters.modeCategories)
+	}
+
+	if (filters.keywords) {
+		conditions.push('job_title LIKE ?')
+		values.push(`%${filters.keywords}%`)
 	}
 
 	sql += joins.join(' ')

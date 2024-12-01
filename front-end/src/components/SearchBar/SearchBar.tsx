@@ -31,6 +31,9 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 	const [isMobile, setIsMobile] = useState<boolean>(false)
 	const [isFilterMenuShown, setIsFilterMenuShown] = useState<boolean>(false)
 	const [posts, setPosts] = useState<string[]>([])
+	const [keywords, setKeywords] = useState<string>('')
+	const [isSearchContentShown, setisSearchContentShown] = useState<boolean>(false)
+	const [inputKeywordsValue, setInputKeywordsValue] = useState<string>('')
 	const mobileSize = 1000
 	let testFun: (category: string) => void
 	resize(mobileSize, setIsMobile)
@@ -43,6 +46,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 			contractCategories,
 			dimensionCategories,
 			modeCategories,
+			keywords,
 		}
 
 		// Filtruj puste tablice
@@ -54,7 +58,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 		if (Object.keys(nonEmptyFilters).length > 0) {
 			try {
 				const res = await axiosInstance.post('filters', filters)
-				setPosts(state => (state = res.data))
+				setPosts(prevState => (prevState = res.data))
 			} catch (error) {
 				console.log('Błąd podczas pobierania danych z serwera')
 			}
@@ -77,6 +81,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 		contractCategories,
 		dimensionCategories,
 		modeCategories,
+		keywords,
 	])
 
 	function handleFilterBox(name: string) {
@@ -157,11 +162,59 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 		}
 	}
 
+	const debouncedKeywordSearch = debounce((value: string) => {
+		setKeywords(value)
+	}, 300)
+
+	const HandleKeywordsInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setInputKeywordsValue(e.target.value)
+		debouncedKeywordSearch(e.target.value)
+	}
+
+	const handleShowInputContent = () => {
+		setisSearchContentShown(true)
+	}
+
+	const handleHideInputContent = () => {
+		setTimeout(() => {
+			setisSearchContentShown(false)
+		}, 100)
+	}
+
+	const setInputValue = (el: string) => {
+		setInputKeywordsValue(prevState => (prevState = el))
+	}
+
 	return (
 		<div className={styles.searchBar}>
 			<div className={styles.inputContainer}>
-				<input type='text' placeholder='Stanowisko, firma, słowo kluczowe' />
-				<input type='text' placeholder='Lokalizacja' />
+				<div className={`${styles.inputs} ${styles.inputs__left}`}>
+					<input
+						type='text'
+						placeholder='Stanowisko, firma, słowo kluczowe'
+						onChange={HandleKeywordsInput}
+						onFocus={handleShowInputContent}
+						onBlur={handleHideInputContent}
+						value={inputKeywordsValue}
+					/>
+					{isSearchContentShown && posts.length > 0 && (
+						<div className={styles.inputs__content}>
+							<ul>
+								<h3>Sugerowane wyszukiwania:</h3>
+								{posts.map(el => {
+									return (
+										<li>
+											<button onClick={() => setInputValue(el)}>{el}</button>
+										</li>
+									)
+								})}
+							</ul>
+						</div>
+					)}
+				</div>
+				<div className={`${styles.inputs} ${styles.inputs__right}`}>
+					<input type='text' placeholder='Lokalizacja' />
+				</div>
 			</div>
 			{!isMobile && (
 				<SearchBar__info
@@ -229,7 +282,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 					/>
 				)}
 				<MainButton icon={GLASS} bgc={true}>
-					<span>{posts.length > 0 ? posts.length : ''}</span>
+					{posts.length > 0 && <span className={styles.counter}>{posts.length}</span>}
 					Szukaj
 				</MainButton>
 			</div>

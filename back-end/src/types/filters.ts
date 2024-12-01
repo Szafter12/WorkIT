@@ -5,4 +5,5 @@ export interface Filters {
 	contractCategories?: string[]
 	dimensionCategories?: string[]
 	modeCategories?: string[]
+	keywords?: string
 }
