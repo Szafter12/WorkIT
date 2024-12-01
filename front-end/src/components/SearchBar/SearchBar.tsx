@@ -3,6 +3,7 @@ import styles from './SearchBar.module.scss'
 import { MainButton } from '../MainButton/MainButton'
 import { SearchBoxSpecializations, SearchBoxTech } from '../../types/SearchBar'
 import GLASS from '../../assets/icons/magnifying-glass.png'
+import DARK_GLASS from '../../assets/icons/magnifying-glass-dark.png'
 import { FilterBtn } from '../FilterBtn/FilterBtn'
 import { filters } from '../../constants/filters'
 import { FilterBox } from '../FilterBox/FilterBox'
@@ -201,7 +202,10 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 					{isSearchContentShown && posts.length > 0 && (
 						<div className={styles.inputs__content}>
 							<ul>
-								<h3>Sugerowane wyszukiwania:</h3>
+								<div className={styles.flex}>
+									<img src={DARK_GLASS} alt='' />
+									<h3>Sugerowane wyszukiwania:</h3>
+								</div>
 								{posts.map(el => {
 									return (
 										<li>

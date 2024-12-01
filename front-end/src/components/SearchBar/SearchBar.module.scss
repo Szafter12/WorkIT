@@ -24,6 +24,12 @@
 		gap: 1em;
 	}
 
+	.flex {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.5em;
+	}
+
 	.filterContainer {
 		position: relative;
 	}
