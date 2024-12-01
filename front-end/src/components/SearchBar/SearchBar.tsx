@@ -34,6 +34,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 	const [keywords, setKeywords] = useState<string>('')
 	const [isSearchContentShown, setisSearchContentShown] = useState<boolean>(false)
 	const [inputKeywordsValue, setInputKeywordsValue] = useState<string>('')
+
 	const mobileSize = 1000
 	let testFun: (category: string) => void
 	resize(mobileSize, setIsMobile)
