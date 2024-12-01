@@ -7,7 +7,7 @@ export const getAllSpecializations = async () => {
 }
 
 export const getPopularTech = async () => {
-	const sql = 'SELECT * FROM abilities ORDER BY ability_id LIMIT 15'
+	const sql = 'SELECT * FROM abilities ORDER BY ability_id'
 	const res = await query(sql)
 	return res
 }

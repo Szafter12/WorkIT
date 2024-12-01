@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { resize } from '../../hooks/resize'
 import ARROW from '../../assets/icons/arrow.png'
 import { FiltersMobile } from '../FiltersMobile/FiltersMobile'
+import { SmallBox } from '../SmallBox/SmallBox'
 
 interface SearchBarProps {
 	specializations: SearchBoxSpecializations[]
@@ -57,7 +58,16 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 					specializations={specializations}
 				/>
 			)}
-			{categories.length > 0 && <p className={styles.activeFilters}>Aktywne filtry: {categories.length}</p>}
+			{categories.length > 0 && (
+				<div className={styles.activeFilters}>
+					<p>Aktywne filtry: {categories.length}</p>
+					<div>
+						{categories.map(el => {
+							return <SmallBox name={el} arrow={false} toggleCategory={toggleCategory} />
+						})}
+					</div>
+				</div>
+			)}
 			<div className={styles.btnContainer}>
 				{!isMobile && (
 					<div className={styles.df}>
