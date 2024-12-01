@@ -11,6 +11,7 @@ import { resize } from '../../hooks/resize'
 import ARROW from '../../assets/icons/arrow.png'
 import { FiltersMobile } from '../FiltersMobile/FiltersMobile'
 import { SmallBox } from '../SmallBox/SmallBox'
+import axiosInstance from '../../api/axiosInstance'
 
 interface SearchBarProps {
 	specializations: SearchBoxSpecializations[]
@@ -28,11 +29,12 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 	const [modeCategories, setModeCategories] = useState<string[]>([])
 	const [isMobile, setIsMobile] = useState<boolean>(false)
 	const [isFilterMenuShown, setIsFilterMenuShown] = useState<boolean>(false)
+	const [posts, setPosts] = useState<string[]>([])
 	const mobileSize = 1000
 	let testFun: (category: string) => void
 	resize(mobileSize, setIsMobile)
 
-	const sendFiltersToBackend = () => {
+	const sendFiltersToBackend = async () => {
 		const filters = {
 			techCategories,
 			specializationsCategories,
@@ -49,13 +51,14 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 		)
 
 		if (Object.keys(nonEmptyFilters).length > 0) {
-			fetch('/api/filters', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(nonEmptyFilters),
-			})
+			try {
+				const res = await axiosInstance.post('filters', filters)
+				setPosts(state => (state = res.data))
+			} catch (error) {
+				console.log('Błąd podczas pobierania danych z serwera')
+			}
+		} else {
+			setPosts([])
 		}
 	}
 
@@ -223,6 +226,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 					Szukaj
 				</MainButton>
 			</div>
+			<p>{posts}</p>
 		</div>
 	)
 }
