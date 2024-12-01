@@ -12,6 +12,7 @@ import ARROW from '../../assets/icons/arrow.png'
 import { FiltersMobile } from '../FiltersMobile/FiltersMobile'
 import { SmallBox } from '../SmallBox/SmallBox'
 import axiosInstance from '../../api/axiosInstance'
+import debounce from 'lodash/debounce'
 
 interface SearchBarProps {
 	specializations: SearchBoxSpecializations[]
@@ -63,7 +64,12 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 	}
 
 	useEffect(() => {
-		sendFiltersToBackend()
+		const debouncedFetch = debounce(() => sendFiltersToBackend(), 300) // Opóźnienie 300ms
+		debouncedFetch()
+
+		return () => {
+			debouncedFetch.cancel()
+		}
 	}, [
 		techCategories,
 		specializationsCategories,
@@ -223,10 +229,10 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 					/>
 				)}
 				<MainButton icon={GLASS} bgc={true}>
+					<span>{posts.length > 0 ? posts.length : ''}</span>
 					Szukaj
 				</MainButton>
 			</div>
-			<p>{posts}</p>
 		</div>
 	)
 }

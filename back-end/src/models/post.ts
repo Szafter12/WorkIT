@@ -3,7 +3,7 @@ import { Filters } from '../types/filters'
 
 export const buildQuery = async (filters: Filters): Promise<any> => {
 	let sql = `
-      SELECT job_title
+      SELECT COUNT(job_title)
       FROM posts
     `
 	const joins: string[] = []
