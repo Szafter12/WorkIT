@@ -33,8 +33,6 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 		}
 	}
 
-	console.log(categories)
-
 	const toggleCategory = (category: string) => {
 		setCategories(prevState => {
 			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
