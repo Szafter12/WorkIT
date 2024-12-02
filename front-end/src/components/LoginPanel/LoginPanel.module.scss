@@ -1,0 +1,60 @@
+.loginPanel {
+	display: flex;
+	flex-direction: column;
+	gap: 2em;
+	padding: 3em;
+	width: 800px;
+	min-height: 400px;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.33);
+
+	.inputContainer {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+		width: 100%;
+	}
+
+	input {
+		width: 100%;
+		padding: 0.5em 1em;
+	}
+
+	p {
+		font-size: clamp(1.8rem, 3vw, 2rem);
+		font-weight: 500;
+		text-align: center;
+	}
+
+	.bottom {
+		p {
+			font-size: clamp(1.2rem, 3vw, 1.4rem);
+			margin: 1em 0;
+		}
+
+		a {
+			padding: 0.3em;
+			text-decoration: underline;
+			transition: background-color 0.3s, color 0.3s;
+
+			&:hover {
+				background-color: var(--main-color);
+				color: var(--white-color);
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+@media (hover: none) and (pointer: coarse) {
+	.loginPanel {
+		.bottom {
+			a {
+				&:hover {
+					background-color: initial;
+					color: initial;
+					text-decoration: initial;
+				}
+			}
+		}
+	}
+}

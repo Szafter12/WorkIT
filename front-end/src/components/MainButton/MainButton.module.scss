@@ -21,3 +21,11 @@
 		width: auto;
 	}
 }
+
+@media (hover: none) and (pointer: coarse) {
+	.btn {
+		&:hover {
+			border-radius: initial;
+		}
+	}
+}

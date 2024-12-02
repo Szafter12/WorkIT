@@ -29,3 +29,13 @@
 		color: var(--white-color);
 	}
 }
+
+@media (hover: none) and (pointer: coarse) {
+	.nav {
+		li a {
+			&:hover::before {
+				transform: initial;
+			}
+		}
+	}
+}

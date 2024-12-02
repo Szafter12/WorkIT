@@ -18,3 +18,11 @@
 		background-color: rgba(72, 85, 198, 0.2);
 	}
 }
+
+@media (hover: none) and (pointer: coarse) {
+	.filterBtn {
+		&:hover {
+			background-color: initial;
+		}
+	}
+}

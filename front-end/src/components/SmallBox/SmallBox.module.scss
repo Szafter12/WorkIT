@@ -20,3 +20,12 @@
 		border-color: var(--main-color);
 	}
 }
+
+@media (hover: none) and (pointer: coarse) {
+	.smallBox {
+		&:hover {
+			box-shadow: initial;
+			border-color: initial;
+		}
+	}
+}

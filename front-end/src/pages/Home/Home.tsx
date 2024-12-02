@@ -13,6 +13,7 @@ export function Home() {
 				5067 sprawdzonych ofert pracy
 			</Header>
 			<SearchBar tech={tech} specializations={specializations} />
+			
 			<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 		</Layout>
 	)

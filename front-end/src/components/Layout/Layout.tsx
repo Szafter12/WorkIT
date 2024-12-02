@@ -16,9 +16,10 @@ import { resize } from '../../hooks/resize'
 
 interface LayoutProps {
 	children: React.ReactNode
+	isCentered?: boolean
 }
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children, isCentered }: LayoutProps) {
 	const [isLoginPrevShown, setIsLoginPrevShown] = useState<boolean>(false)
 	const [isMobile, setIsMobile] = useState<boolean>(false)
 	const [isMobileShown, setIsMobileShown] = useState<boolean>(false)
@@ -73,7 +74,7 @@ export function Layout({ children }: LayoutProps) {
 					)}
 					{isMobile && <BurgerMenu onClick={handleMobileMenu} />}
 				</TopBar>
-				<Main>{children}</Main>
+				<Main center={isCentered}>{children}</Main>
 				<Footer />
 				{isMobile && <MobileMenu isMobileShown={isMobileShown} />}
 			</LayoutContent>
