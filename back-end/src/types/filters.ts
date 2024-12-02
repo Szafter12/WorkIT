@@ -6,4 +6,5 @@ export interface Filters {
 	dimensionCategories?: string[]
 	modeCategories?: string[]
 	keywords?: string
+	Citieskeywords?: string
 }

@@ -1,4 +1,5 @@
 import { query } from '../config/db'
+import { Cities } from '../types/cities'
 import { Filters } from '../types/filters'
 
 export const buildQuery = async (filters: Filters): Promise<any> => {
@@ -57,6 +58,12 @@ export const buildQuery = async (filters: Filters): Promise<any> => {
 		values.push(`%${filters.keywords}%`)
 	}
 
+	if (filters.Citieskeywords) {
+		joins.push('JOIN company_address USING (company_id) JOIN city USING (city_id)')
+		conditions.push('city LIKE ?')
+		values.push(`%${filters.Citieskeywords}%`)
+	}
+
 	sql += joins.join(' ')
 
 	if (conditions.length > 0) {
@@ -70,4 +77,17 @@ export const buildQuery = async (filters: Filters): Promise<any> => {
 
 	const rows = await query(sql, values)
 	return rows
+}
+
+export const cities = async (city: string): Promise<any> => {
+	let sql = 'SELECT city FROM city'
+	const values: string[] = []
+
+	if (city) {
+		sql += ` WHERE city LIKE ?`
+		values.push(`%${city}%`)
+	}
+
+	const res = await query(sql, values)
+	return res
 }

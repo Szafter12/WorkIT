@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
-import { buildQuery } from '../models/post'
+import { buildQuery, cities } from '../models/post'
 import { Filters } from '../types/filters'
+import { Cities } from '../types/cities'
 
 export const handleFilters = async (req: Request, res: Response): Promise<void> => {
 	const filters: Filters = req.body
@@ -12,5 +13,17 @@ export const handleFilters = async (req: Request, res: Response): Promise<void> 
 	} catch (error) {
 		console.error(error)
 		res.status(500).json({ error: 'Database query failed' })
+	}
+}
+
+export const getCities = async (req: Request, res: Response): Promise<void> => {
+	const city: any = req.body
+
+	try {
+		const result = await cities(city.Citieskeywords)
+		const Newcity = result.map((row: any) => row.city)
+		res.json(Newcity)
+	} catch (err) {
+		console.log(err)
 	}
 }

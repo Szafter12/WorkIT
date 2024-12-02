@@ -15,6 +15,7 @@ app.use(cors({}))
 
 app.use('/', spacializationsRoutes)
 app.use('/', postRoutes)
+app.use('/', postRoutes)
 
 app.listen(port, () => {
 	console.log(`serwer dziala na porcie ${port}`)

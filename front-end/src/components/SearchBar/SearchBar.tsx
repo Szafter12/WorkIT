@@ -22,6 +22,7 @@ interface SearchBarProps {
 
 export function SearchBar({ specializations, tech }: SearchBarProps) {
 	const [currentFilterBox, setCurrentFilterBox] = useState('')
+
 	const [activeCategories, setactiveCategories] = useState<string[]>([])
 	const [techCategories, setTechCategories] = useState<string[]>([])
 	const [specializationsCategories, setSpecializationsCategories] = useState<string[]>([])
@@ -29,12 +30,19 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 	const [contractCategories, setContractCategories] = useState<string[]>([])
 	const [dimensionCategories, setDimensionCategories] = useState<string[]>([])
 	const [modeCategories, setModeCategories] = useState<string[]>([])
+
 	const [isMobile, setIsMobile] = useState<boolean>(false)
 	const [isFilterMenuShown, setIsFilterMenuShown] = useState<boolean>(false)
+
 	const [posts, setPosts] = useState<string[]>([])
 	const [keywords, setKeywords] = useState<string>('')
 	const [isSearchContentShown, setisSearchContentShown] = useState<boolean>(false)
 	const [inputKeywordsValue, setInputKeywordsValue] = useState<string>('')
+
+	const [cities, setCities] = useState<string[]>([])
+	const [Citieskeywords, setCitiesKeywords] = useState<string>('')
+	const [citiesInputValue, setCitiesInputValue] = useState<string>('')
+	const [isCitiesContentShown, setisCitiesContentShown] = useState<boolean>(false)
 
 	const mobileSize = 1000
 	let testFun: (category: string) => void
@@ -49,6 +57,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 			dimensionCategories,
 			modeCategories,
 			keywords,
+			Citieskeywords
 		}
 
 		// Filtruj puste tablice
@@ -84,7 +93,30 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 		dimensionCategories,
 		modeCategories,
 		keywords,
+		Citieskeywords
 	])
+
+	const getCities = async () => {
+		const city = {
+			Citieskeywords,
+		}
+		if (Citieskeywords.length > 0) {
+			try {
+				const res = await axiosInstance.post('cities', city)
+				setCities(state => (state = res.data))
+			} catch (err) {
+				console.log(err)
+			}
+		} else {
+			setCities([])
+		}
+	}
+
+	console.log(Citieskeywords)
+
+	useEffect(() => {
+		getCities()
+	}, [Citieskeywords])
 
 	function handleFilterBox(name: string) {
 		if (currentFilterBox === name) {
@@ -168,6 +200,10 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 		setKeywords(value)
 	}, 300)
 
+	const debounceCitiesSearch = debounce((value: string) => {
+		setCitiesKeywords(value)
+	}, 300)
+
 	const HandleKeywordsInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputKeywordsValue(e.target.value)
 		debouncedKeywordSearch(e.target.value)
@@ -185,6 +221,21 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 
 	const setInputValue = (el: string) => {
 		setInputKeywordsValue(prevState => (prevState = el))
+	}
+
+	const handleCitiesInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setCitiesInputValue(e.target.value)
+		debounceCitiesSearch(e.target.value)
+	}
+
+	const handleShowCitiesContent = () => {
+		setisCitiesContentShown(true)
+	}
+
+	const handleHideCitiesContent = () => {
+		setTimeout(() => {
+			setisCitiesContentShown(false)
+		}, 100)
 	}
 
 	return (
@@ -208,7 +259,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 								</div>
 								{posts.map(el => {
 									return (
-										<li>
+										<li key={el}>
 											<button onClick={() => setInputValue(el)}>{el}</button>
 										</li>
 									)
@@ -218,7 +269,31 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 					)}
 				</div>
 				<div className={`${styles.inputs} ${styles.inputs__right}`}>
-					<input type='text' placeholder='Lokalizacja' />
+					<input
+						type='text'
+						placeholder='Lokalizacja'
+						onChange={handleCitiesInput}
+						onFocus={handleShowCitiesContent}
+						onBlur={handleHideCitiesContent}
+						value={citiesInputValue}
+					/>
+					{isCitiesContentShown && cities.length > 0 && (
+						<div className={styles.inputs__content}>
+							<ul>
+								<div className={styles.flex}>
+									<img src={DARK_GLASS} alt='' />
+									<h3>Miasta: </h3>
+								</div>
+								{cities.map(el => {
+									return (
+										<li key={el}>
+											<button onClick={() => setCitiesInputValue(el)}>{el}</button>
+										</li>
+									)
+								})}
+							</ul>
+						</div>
+					)}
 				</div>
 			</div>
 			{!isMobile && (
@@ -235,7 +310,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 					<p>Aktywne filtry: {activeCategories.length}</p>
 					<div>
 						{activeCategories.map(el => {
-							return <SmallBox name={el} arrow={false} />
+							return <SmallBox key={el} name={el} arrow={false} />
 						})}
 					</div>
 				</div>
@@ -246,9 +321,8 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 						{filters.map(el => {
 							setFilterFun(el.name)
 							return (
-								<div className={styles.filterContainer}>
+								<div key={el.name} className={styles.filterContainer}>
 									<FilterBtn
-										key={el.name}
 										arrow={currentFilterBox === el.name ? false : true}
 										onClick={() => handleFilterBox(el.name)}>
 										{el.name}
