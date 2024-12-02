@@ -57,7 +57,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 			dimensionCategories,
 			modeCategories,
 			keywords,
-			Citieskeywords
+			Citieskeywords,
 		}
 
 		// Filtruj puste tablice
@@ -93,7 +93,7 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 		dimensionCategories,
 		modeCategories,
 		keywords,
-		Citieskeywords
+		Citieskeywords,
 	])
 
 	const getCities = async () => {
@@ -111,8 +111,6 @@ export function SearchBar({ specializations, tech }: SearchBarProps) {
 			setCities([])
 		}
 	}
-
-	console.log(Citieskeywords)
 
 	useEffect(() => {
 		getCities()
