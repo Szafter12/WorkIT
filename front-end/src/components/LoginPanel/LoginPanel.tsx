@@ -7,8 +7,8 @@ export function LoginPanel() {
 		<div className={styles.loginPanel}>
 			<p>Zaloguj się do swojego konta</p>
 			<div className={styles.inputContainer}>
-				<input type='email' />
-				<input type='password' />
+				<input type='email' placeholder='E-mail' />
+				<input type='password' placeholder='Hasło' />
 			</div>
 			<MainButton>Zaloguj</MainButton>
 			<div className={styles.bottom}>
