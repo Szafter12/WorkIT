@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import { Home } from '../pages/Home/Home'
 import { MainPageLoader } from '../api/MainPageLoader'
 import { Login } from '../pages/LoginPanel/Login'
+import { Work } from '../pages/Work/Work'
 
 export const router = createBrowserRouter(
 	[
@@ -11,8 +12,12 @@ export const router = createBrowserRouter(
 			loader: MainPageLoader,
 		},
 		{
-			path: '/login',
+			path: '/logowanie',
 			element: <Login />,
+		},
+		{
+			path: '/praca',
+			element: <Work />,
 		},
 	],
 	{
