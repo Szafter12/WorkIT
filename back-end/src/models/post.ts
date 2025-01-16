@@ -1,5 +1,4 @@
 import { query } from '../config/db'
-import { Cities } from '../types/cities'
 import { Filters } from '../types/filters'
 
 export const buildQuery = async (filters: Filters): Promise<any> => {

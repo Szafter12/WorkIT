@@ -5,5 +5,6 @@ const router = Router()
 
 router.post('/filters', postController.handleFilters)
 router.post('/cities', postController.getCities)
+router.get('/cities', postController.getCities)
 
 export default router

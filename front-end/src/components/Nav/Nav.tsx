@@ -18,7 +18,7 @@ export function Nav({ isMobile }: NavProps) {
 				{NAV_ITEMS.map(item => {
 					return (
 						<li key={item.name}>
-							<NavLink to={item.path}>{item.name}</NavLink>
+							<NavLink to={`/${item.path}`}>{item.name}</NavLink>
 						</li>
 					)
 				})}

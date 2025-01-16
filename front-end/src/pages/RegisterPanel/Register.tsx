@@ -1,10 +1,10 @@
 import { Layout } from '../../components/Layout/Layout'
 import { LoginPanel } from '../../components/LoginPanel/LoginPanel'
 
-export function Login() {
+export function Register() {
 	return (
 		<Layout isCentered={true}>
-			<LoginPanel register={false} />
+			<LoginPanel register={true} />
 		</Layout>
 	)
 }

@@ -43,7 +43,15 @@
 			}
 		}
 	}
+	.col6 {
+		display: flex;
+		gap: 0.5em;
+	}
+	select {
+		padding: 1em;
+	}
 }
+
 
 @media (hover: none) and (pointer: coarse) {
 	.loginPanel {
