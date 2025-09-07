@@ -10,7 +10,7 @@ export const router = createBrowserRouter(
 		{
 			path: '/',
 			element: <Home />,
-			loader: MainPageLoader,
+			// loader: MainPageLoader,
 		},
 		{
 			path: '/logowanie',
