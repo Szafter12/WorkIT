@@ -3,8 +3,8 @@ import { SmallBox } from '../SmallBox/SmallBox'
 import { useState } from 'react'
 
 export function SearchBar__info({
-	specializations,
-	tech,
+	specializations = [],
+	tech = [],
 	toggleSpecializationsCategory,
 	toggleTechCategory,
 	activeCategories,

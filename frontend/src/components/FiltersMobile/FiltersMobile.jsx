@@ -1,6 +1,5 @@
 import { SearchBar__info } from '../SearchBar__info/SearchBar__info'
 import styles from './FiltersMobile.module.scss'
-import { SearchBoxSpecializations, SearchBoxTech } from '../../types/SearchBar'
 import CLOSE from '../../assets/icons/close.png'
 import { SmallBox } from '../SmallBox/SmallBox'
 import { filters } from '../../constants/filters'

@@ -2,10 +2,11 @@ import axiosInstance from './axiosInstance'
 
 export const MainPageLoader = async () => {
 	try {
-		const [specializations, tech] = await Promise.all([axiosInstance.get('specializations'), axiosInstance.get('tech')])
+		const res = await axiosInstance.get('/api/home')
+
 		return {
-			specializations: specializations.data,
-			tech: tech.data
+			specializations: res.data.specializations,
+			tech: res.data.technology
 		}
 	} catch (error) {
 		console.log('Błąd podczas pobierania danych z serwera')

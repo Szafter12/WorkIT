@@ -1,7 +1,6 @@
 import { SearchBar__info } from '../SearchBar__info/SearchBar__info'
 import styles from './SearchBar.module.scss'
 import { MainButton } from '../MainButton/MainButton'
-import { SearchBoxSpecializations, SearchBoxTech } from '../../types/SearchBar'
 import GLASS from '../../assets/icons/magnifying-glass.png'
 import DARK_GLASS from '../../assets/icons/magnifying-glass-dark.png'
 import { FilterBtn } from '../FilterBtn/FilterBtn'
