@@ -16,6 +16,7 @@ use App\Models\Posts;
 use App\Models\PostSpecializations;
 use App\Models\Specializations;
 use App\Models\User;
+use App\Models\UserAbilities;
 use App\Models\UserAddress;
 use App\Models\UserEducation;
 use App\Models\UserLanguage;
@@ -259,6 +260,13 @@ class DatabaseSeeder extends Seeder
         foreach ($users as $user) {
             $randomNumber = mt_rand(5, 10);
             $randomAbility = collect($abilities)->random($randomNumber);
+            
+            foreach ($randomAbility as $ability) {
+                UserAbilities::factory()->create([
+                    'user_id' => $user->id,
+                    'ability_id' => Abilities::where('ability_name', "=", $ability)->first()->id,
+                ]);
+            }
 
             UserAddress::factory()->create([
                 'user_id' => $user->id,
