@@ -18,7 +18,7 @@ class UserSocialLinksFactory extends Factory
     public function definition(): array
     {
         return [
-            "user_id" => User::inRandomOrder()->first()->user_id,
+            "user_id" => User::inRandomOrder()->first()->id,
             "platform_name" => fake()->randomElement(['Facebook', 'Twitter', 'LinkedIn', 'Instagram', 'GitHub']),
             "url" => fake()->url(),
         ];

@@ -19,9 +19,10 @@ class UserAddressFactory extends Factory
     public function definition(): array
     {
         return [
-            "user_id" => User::inRandomOrder()->first()->user_id,
+            "user_id" => User::inRandomOrder()->first()->id,
             "street" => fake()->streetAddress(),
-            "city_id" => City::inRandomOrder()->first()->city_id,
+            "address_line2" => fake()->secondaryAddress(),
+            "city_id" => City::inRandomOrder()->first()->id,
         ];
     }
 }

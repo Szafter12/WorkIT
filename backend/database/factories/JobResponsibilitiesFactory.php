@@ -18,7 +18,7 @@ class JobResponsibilitiesFactory extends Factory
     public function definition(): array
     {
         return [
-            'post_id' => Posts::inRandomOrder()->first()->post_id,
+            'post_id' => Posts::inRandomOrder()->first()->id,
             'responsibility' => fake()->word()
         ];
     }

@@ -19,10 +19,10 @@ class CompanyAddressFactory extends Factory
     public function definition(): array
     {
         return [
-            "company_id" => Companies::inRandomOrder()->first()->company_id,
+            "company_id" => Companies::inRandomOrder()->first()->id,
             "street" => fake()->streetAddress(),
             "address_line2" => fake()->secondaryAddress(),
-            "city_id" => City::inRandomOrder()->first()->city_id,
+            "city_id" => City::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -9,9 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_address', function (Blueprint $table) {
-            $table->id('user_address_id');
+            $table->id('id');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('street', 100);
+            $table->string('address_line2', 100)->nullable();
             $table->foreignId('city_id')->constrained('city');
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';

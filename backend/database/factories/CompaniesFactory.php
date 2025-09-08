@@ -22,7 +22,6 @@ class CompaniesFactory extends Factory
             "phone" => fake()->numerify('#########'),
             "email" => fake()->unique()->safeEmail(),
             "company_info" => fake()->text(500),
-            "addition_date" => fake()->date(),
         ];
     }
 }

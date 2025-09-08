@@ -9,6 +9,10 @@ class PostAbility extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $table = "post_ability";
+
     protected $fillable = [
         'post_id',
         'ability_id'

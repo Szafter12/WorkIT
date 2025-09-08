@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('job_responsibilities', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('post_id')->nullable()->constrained('posts')->onDelete('cascade');
-            $table->text('responsibilities')->nullable();
+            $table->text('responsibility')->nullable();
             $table->charset = 'utf8';
             $table->collation = 'utf8_polish_ci';
         });
@@ -19,6 +19,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('job_responibilities');
+        Schema::dropIfExists('job_responsibilities');
     }
 };

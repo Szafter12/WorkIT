@@ -9,10 +9,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('company_address', function (Blueprint $table) {
-            $table->id('company_address_id');
+            $table->id('id');
             $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
             $table->string('street', 100);
-            $table->foreignId('city_id')->constrained('city');
+            $table->string('address_line2', 100)->nullable();
+            $table->foreignId('city_id')->constrained('city')->onDelete('cascade');
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
         });

@@ -9,6 +9,10 @@ class UserAddress extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $table = "user_address";
+
     protected $fillable = [
         "user_id",
         "street",

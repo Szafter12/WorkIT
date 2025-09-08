@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id('post_id');
+            $table->id('id');
             $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
             $table->string('job_title', 255);
             $table->foreignId('level_id')->constrained('job_level');
@@ -17,8 +17,9 @@ return new class extends Migration
             $table->text('job_description');
             $table->date('end_date');
             $table->foreignId('work_mode_id')->constrained('work_mode');
-            $table->timestamp('addition_date')->useCurrent();
             $table->foreignId('work_dimension_id')->constrained('work_dimension');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_polish_ci';
         });

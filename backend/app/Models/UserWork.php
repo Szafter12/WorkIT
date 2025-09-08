@@ -9,9 +9,13 @@ class UserWork extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $table = "user_work";
+    
     protected $fillable = [
         'user_id',
-        'comapny_name',
+        'company_name',
         'position',
         'start_date',
         'end_date'

@@ -19,8 +19,8 @@ class PostAbilityFactory extends Factory
     public function definition(): array
     {
         return [
-            "post_id" => Posts::inRandomOrder()->first()->post_id,
-            "ability_id" => Abilities::inRandomOrder()->first()->ability_id
+            "post_id" => Posts::inRandomOrder()->first()->id,
+            "ability_id" => Abilities::inRandomOrder()->first()->id
         ];
     }
 }

@@ -9,6 +9,8 @@ class UserAbilities extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'user_id',
         'ability_id'

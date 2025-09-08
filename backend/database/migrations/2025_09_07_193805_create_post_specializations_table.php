@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('post_specialization', function (Blueprint $table) {
+        Schema::create('post_specializations', function (Blueprint $table) {
             $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
             $table->foreignId('specialization_id')->constrained('specializations');
             $table->charset = 'utf8mb4';
@@ -18,6 +18,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('post_specialization');
+        Schema::dropIfExists('post_specializations');
     }
 };

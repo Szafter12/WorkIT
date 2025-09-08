@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_work', function (Blueprint $table) {
-            $table->id('user_work_id');
+            $table->id('id');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('comapny_name', 255);
+            $table->string('company_name', 255);
             $table->string('position', 255);
             $table->date('start_date');
             $table->date('end_date');

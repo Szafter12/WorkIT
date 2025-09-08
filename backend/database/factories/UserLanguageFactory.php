@@ -19,8 +19,8 @@ class UserLanguageFactory extends Factory
     public function definition(): array
     {
         return [
-            "language_id" => Languages::inRandomOrder()->first()->language_id,
-            "user_id" => User::inRandomOrder()->first()->user_id,
+            "language_id" => Languages::inRandomOrder()->first()->id,
+            "user_id" => User::inRandomOrder()->first()->id,
             "level" => fake()->randomElement(['A1', 'A2', 'B1', 'B2', 'C1', 'C2']),
         ];
     }

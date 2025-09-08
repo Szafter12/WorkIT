@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->id('id');
             $table->string('name', 15);
             $table->string('surname', 15);
             $table->date('date_of_birth');
@@ -21,7 +21,8 @@ return new class extends Migration
             $table->text('description');
             $table->string('remember_token', 255)->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->timestamp('addition_date')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_polish_ci';
         });

@@ -9,6 +9,10 @@ class JobLevel extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $table = "job_level";
+
     protected $fillable = [
         'level'
     ];

@@ -19,8 +19,8 @@ class PostSpecializationsFactory extends Factory
     public function definition(): array
     {
         return [
-            "post_id" => Posts::inRandomOrder()->first()->post_id,
-            "specialization_id" => Specializations::inRandomOrder()->first()->specialization_id,
+            "post_id" => Posts::inRandomOrder()->first()->id,
+            "specialization_id" => Specializations::inRandomOrder()->first()->id,
         ];
     }
 }

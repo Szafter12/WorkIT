@@ -9,6 +9,10 @@ class WorkDimension extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $table = "work_dimension";
+
     protected $fillable = [
         'work_dimension_name'
     ];

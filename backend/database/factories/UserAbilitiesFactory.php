@@ -19,8 +19,8 @@ class UserAbilitiesFactory extends Factory
     public function definition(): array
     {
         return [
-            "user_id" => User::inRandomOrder()->first()->user_id,
-            "ability_id" => Abilities::inRandomOrder()->first()->ability_id,
+            "user_id" => User::inRandomOrder()->first()->id,
+            "ability_id" => Abilities::inRandomOrder()->first()->id,
         ];
     }
 }

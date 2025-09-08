@@ -9,6 +9,8 @@ class Specializations extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'specialization'
     ];

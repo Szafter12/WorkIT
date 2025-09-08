@@ -9,6 +9,10 @@ class CompanyAddress extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $table = "company_address";
+
     protected $fillable = [
         'company_id',
         'street',

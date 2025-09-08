@@ -9,5 +9,7 @@ class Abilities extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = ['ability_name'];
 }

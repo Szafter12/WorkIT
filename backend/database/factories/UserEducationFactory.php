@@ -22,7 +22,7 @@ class UserEducationFactory extends Factory
         $end = fake()->dateTimeBetween($start, 'now');
 
         return [
-            "user_id" => User::inRandomOrder()->first()->user_id,
+            "user_id" => User::inRandomOrder()->first()->id,
             "school_name" => fake()->company(),
             "degree" => fake()->word(),
             "field_name" => fake()->word(),

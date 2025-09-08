@@ -9,6 +9,10 @@ class ContractType extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $table = "contract_type";
+
     protected $fillable = [
         'contract_name'
     ];

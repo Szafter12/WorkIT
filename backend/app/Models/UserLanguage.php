@@ -9,6 +9,9 @@ class UserLanguage extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $table = "user_language";
     protected $fillable = [
         "language_id",
         "user_id",

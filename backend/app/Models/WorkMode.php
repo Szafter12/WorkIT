@@ -9,6 +9,10 @@ class WorkMode extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $table = "work_mode";
+
     protected $fillable = [
         'work_mode_name'
     ];

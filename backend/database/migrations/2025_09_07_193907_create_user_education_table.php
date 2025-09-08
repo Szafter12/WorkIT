@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_education', function (Blueprint $table) {
-            $table->id('education_id');
+            $table->id('id');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('school_name', 255);
             $table->string('degree', 255);

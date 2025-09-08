@@ -22,14 +22,14 @@ class PostsFactory extends Factory
     public function definition(): array
     {
         return [
-            "company_id" => Companies::inRandomOrder()->first()->company_id,
+            "company_id" => Companies::inRandomOrder()->first()->id,
             "job_title" => fake()->jobTitle(),
-            "level_id" => JobLevel::inRandomOrder()->first()->level_id,
-            "contract_type_id" => ContractType::inRandomOrder()->first()->contract_type_id,
+            "level_id" => JobLevel::inRandomOrder()->first()->id,
+            "contract_type_id" => ContractType::inRandomOrder()->first()->id,
             "job_description" => fake()->text(200),
             "end_date" => fake()->dateTimeBetween('now', '+2 months')->format('d m Y'),
-            "work_mode_id" => WorkMode::inRandomOrder()->first()->work_mode_id,
-            "work_dimension_id" => WorkDimension::inRandomOrder()->first()->work_dimension_id
+            "work_mode_id" => WorkMode::inRandomOrder()->first()->id,
+            "work_dimension_id" => WorkDimension::inRandomOrder()->first()->id
         ];
     }
 }

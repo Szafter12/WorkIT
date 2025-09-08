@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('work_dimension', function (Blueprint $table) {
-            $table->id('work_dimension_id');
+            $table->id('id');
             $table->string('work_dimension_name', 100)->unique();
             $table->charset = 'utf8';
             $table->collation = 'utf8_polish_ci';

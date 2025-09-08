@@ -22,7 +22,7 @@ class UserWorkFactory extends Factory
         $end = fake()->dateTimeBetween($start,'now');
 
         return [
-            "user_id" => User::inRandomOrder()->first()->user_id,
+            "user_id" => User::inRandomOrder()->first()->id,
             "company_name" => fake()->company(),
             "position" => fake()->jobTitle(),
             "start_date" => $start->format('d m Y'),
