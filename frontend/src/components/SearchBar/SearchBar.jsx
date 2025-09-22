@@ -43,54 +43,6 @@ export function SearchBar({ specializations, tech }) {
 	let testFun = null
 	resize(mobileSize, setIsMobile)
 
-	const sendFiltersToBackend = async () => {
-		const filters = {
-			techCategories,
-			specializationsCategories,
-			lvlCategories,
-			contractCategories,
-			dimensionCategories,
-			modeCategories,
-			keywords,
-			Citieskeywords,
-		}
-
-		// Filtruj puste tablice
-		const nonEmptyFilters = Object.entries(filters).reduce(
-			(acc, [key, value]) => (value.length ? { ...acc, [key]: value } : acc),
-			{}
-		)
-
-		if (Object.keys(nonEmptyFilters).length > 0) {
-			try {
-				const res = await axiosInstance.post('filters', filters)
-				setPosts(prevState => (prevState = res.data))
-			} catch (error) {
-				console.log('Błąd podczas pobierania danych z serwera')
-			}
-		} else {
-			setPosts([])
-		}
-	}
-
-	useEffect(() => {
-		const debouncedFetch = debounce(() => sendFiltersToBackend(), 300) // Opóźnienie 300ms
-		debouncedFetch()
-
-		return () => {
-			debouncedFetch.cancel()
-		}
-	}, [
-		techCategories,
-		specializationsCategories,
-		lvlCategories,
-		contractCategories,
-		dimensionCategories,
-		modeCategories,
-		keywords,
-		Citieskeywords,
-	])
-
 	const getCities = async () => {
 		const city = {
 			Citieskeywords,

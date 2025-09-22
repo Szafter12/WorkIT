@@ -38,7 +38,7 @@ export function SearchBar__info({
 							activeCategories={activeCategories}
 							toggleCategory={toggleSpecializationsCategory}
 							arrow={false}
-							key={el.specialization_id}
+							key={el.id}
 							name={el.specialization}
 						/>
 					)
@@ -58,7 +58,7 @@ export function SearchBar__info({
 							activeCategories={activeCategories}
 							toggleCategory={toggleTechCategory}
 							arrow={false}
-							key={el.ability_id}
+							key={el.id}
 						/>
 					)
 				})}

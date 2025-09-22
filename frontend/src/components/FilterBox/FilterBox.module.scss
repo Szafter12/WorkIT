@@ -1,13 +1,12 @@
 .filterBox {
 	position: absolute;
 	left: 0;
-	bottom: -320px;
+	top: 120%;
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
 	padding: 1em;
 	width: 240px;
-	min-height: 300px;
 	background-color: var(--white-color);
 	border-radius: 12px;
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.33);
