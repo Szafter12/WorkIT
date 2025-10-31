@@ -29,6 +29,30 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function abilities() {
+        return $this->belongsToMany(Abilities::class, 'user_abilities', 'user_id', 'ability_id');
+    }
+
+    public function address() {
+        return $this->hasOne(UserAddress::class);
+    }
+
+    public function education() {
+        return $this->hasMany(UserEducation::class);
+    }
+
+    public function languages() {
+        return $this->belongsToMany(UserLanguage::class, 'user_language', 'user_id', 'language_id');
+    }
+
+    public function socials() {
+        return $this->hasMany(UserSocialLinks::class);
+    }
+
+    public function works() {
+        return $this->hasMany(UserWork::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

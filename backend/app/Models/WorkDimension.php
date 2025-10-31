@@ -16,4 +16,8 @@ class WorkDimension extends Model
     protected $fillable = [
         'work_dimension_name'
     ];
+
+    public function posts() {
+        return $this->hasMany(Posts::class);
+    }
 }

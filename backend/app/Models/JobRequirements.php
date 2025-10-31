@@ -15,4 +15,8 @@ class JobRequirements extends Model
         'post_id',
         'requirement'
     ];
+
+    public function post() {
+        return $this->belongsTo(Posts::class);
+    }
 }

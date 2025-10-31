@@ -16,4 +16,8 @@ class ContractType extends Model
     protected $fillable = [
         'contract_name'
     ];
+
+    public function posts() {
+        return $this->hasMany(Posts::class);
+    }
 }

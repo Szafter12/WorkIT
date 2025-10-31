@@ -13,4 +13,8 @@ class Companies extends Model
     protected $fillable = [
         'company_name', 'company_logo_url', 'phone', 'email', 'company_info', 'addition_date'
     ];
+
+    public function posts() {
+        return $this->hasMany(Posts::class);
+    }
 }

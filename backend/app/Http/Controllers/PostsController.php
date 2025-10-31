@@ -12,7 +12,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Posts::orderBy('created_at', 'desc')->take(25)->get();
+        $posts = Posts::orderBy('created_at', 'desc')->with(['company', 'level'])->take(25)->get();
 
         return response()->json([
             'success' => true,

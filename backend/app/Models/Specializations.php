@@ -14,4 +14,8 @@ class Specializations extends Model
     protected $fillable = [
         'specialization'
     ];
+
+    public function posts() {
+        return $this->belongsToMany(Posts::class, 'post_specializations', 'specialization_id', 'post_id');
+    }
 }

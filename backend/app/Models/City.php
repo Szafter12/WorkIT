@@ -14,4 +14,8 @@ class City extends Model
     protected $table = 'city';
 
     protected $fillable = ['city', 'postal_code'];
+
+    public function companyAddresses() {
+        return $this->hasMany(CompanyAddress::class);
+    }
 }

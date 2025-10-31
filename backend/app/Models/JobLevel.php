@@ -16,4 +16,8 @@ class JobLevel extends Model
     protected $fillable = [
         'level'
     ];
+
+    public function posts() {
+        return $this->hasMany(Posts::class);
+    }
 }
