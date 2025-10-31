@@ -5,7 +5,7 @@ export const WorkLoader = async () => {
         const res = await axiosInstance.get('/api/posts');
         return res.data
     } catch (error) {
-        console.log('Błąd podczas pobierania postów z serwera');
-        return [];
+        const message = "Wystąpił błąd podczas ładowania ofert pracy.";
+        return { success: false, message }
     }
 }

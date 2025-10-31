@@ -17,7 +17,7 @@ class PostsController extends Controller
         return response()->json([
             'success' => true,
             'data' => $posts 
-        ]);
+        ], 200);
     }
 
     /**
