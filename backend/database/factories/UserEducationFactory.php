@@ -26,8 +26,8 @@ class UserEducationFactory extends Factory
             "school_name" => fake()->company(),
             "degree" => fake()->word(),
             "field_name" => fake()->word(),
-            "start_date" => $start->format('d m Y'),
-            "end_date" => $end->format('d m Y'),
+            "start_date" => $start->format('Y-m-d'),
+            "end_date" => $end->format('Y-m-d'),
         ];
     }
 }

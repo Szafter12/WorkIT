@@ -25,8 +25,8 @@ class UserWorkFactory extends Factory
             "user_id" => User::inRandomOrder()->first()->id,
             "company_name" => fake()->company(),
             "position" => fake()->jobTitle(),
-            "start_date" => $start->format('d m Y'),
-            "end_date" => $end->format('d m Y'),
+            "start_date" => $start->format('Y-m-d'),
+            "end_date" => $end->format('Y-m-d'),
         ];
     }
 }

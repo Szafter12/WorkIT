@@ -27,7 +27,7 @@ class PostsFactory extends Factory
             "level_id" => JobLevel::inRandomOrder()->first()->id,
             "contract_type_id" => ContractType::inRandomOrder()->first()->id,
             "job_description" => fake()->text(200),
-            "end_date" => fake()->dateTimeBetween('now', '+2 months')->format('d m Y'),
+            "end_date" => fake()->dateTimeBetween('now', '+2 months')->format('Y-m-d'),
             "work_mode_id" => WorkMode::inRandomOrder()->first()->id,
             "work_dimension_id" => WorkDimension::inRandomOrder()->first()->id
         ];

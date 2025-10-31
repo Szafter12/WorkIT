@@ -27,6 +27,9 @@
 		background-color: var(--main-color);
 		border-radius: 12px;
 		color: var(--white-color);
+		&:hover::before {
+			transform: scale(0);
+		}
 	}
 }
 

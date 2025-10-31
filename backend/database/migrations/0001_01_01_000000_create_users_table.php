@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('id');
-            $table->string('name', 15);
-            $table->string('surname', 15);
+            $table->string('name', 50);
+            $table->string('surname', 50);
             $table->date('date_of_birth');
             $table->string('email', 50)->unique();
             $table->string('phone', 9)->unique();
