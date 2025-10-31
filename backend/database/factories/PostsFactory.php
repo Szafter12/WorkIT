@@ -21,9 +21,30 @@ class PostsFactory extends Factory
      */
     public function definition(): array
     {
+
+        $itJobs = [
+            'Frontend Developer',
+            'Backend Developer',
+            'Fullstack Developer',
+            'DevOps Engineer',
+            'Data Engineer',
+            'Data Scientist',
+            'Machine Learning Engineer',
+            'QA Engineer',
+            'Mobile Developer',
+            'Cloud Architect',
+            'Cybersecurity Specialist',
+            'System Administrator',
+            'IT Support Specialist',
+            'Product Owner',
+            'Scrum Master'
+        ];
+
+        $jobTitle = fake()->randomElement($itJobs);
+
         return [
             "company_id" => Companies::inRandomOrder()->first()->id,
-            "job_title" => fake()->jobTitle(),
+            "job_title" => $jobTitle,
             "level_id" => JobLevel::inRandomOrder()->first()->id,
             "contract_type_id" => ContractType::inRandomOrder()->first()->id,
             "job_description" => fake()->text(200),
