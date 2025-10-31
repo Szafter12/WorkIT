@@ -41,15 +41,15 @@ class Posts extends Model
     }
 
     public function jobRequirements() {
-        return $this->hasMany(JobRequirements::class);
+        return $this->hasMany(JobRequirements::class, 'post_id', 'id');
     }
 
     public function jobResponsibilities() {
-        return $this->hasMany(JobResponsibilities::class);
+        return $this->hasMany(JobResponsibilities::class, 'post_id', 'id');
     }
 
     public function abilities() {
-        return $this->belongsToMany(Abilities::class, 'post_abilities', 'post_id', 'ability_id');
+        return $this->belongsToMany(Abilities::class, 'post_ability', 'post_id', 'ability_id');
     }
 
     public function specializations() {
