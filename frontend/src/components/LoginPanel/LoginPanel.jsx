@@ -2,9 +2,22 @@ import { useEffect, useState } from 'react'
 import { MainButton } from '../MainButton/MainButton'
 import styles from './LoginPanel.module.scss'
 import { Link } from 'react-router-dom'
-import axiosInstance from '../../api/axiosInstance'
+import {getCities} from "../../api/getCities.js";
+
 
 export function LoginPanel({ register }) {
+    const [cities, setCities] = useState([])
+
+    const load = async () => {
+        const list = await getCities();
+            setCities(list);
+            console.log(list);
+    };
+
+    useEffect(() => {
+        load();
+    }, []);
+
     if (!register) {
 		return (
 			<div className={styles.loginPanel}>
@@ -39,6 +52,9 @@ export function LoginPanel({ register }) {
 							<option value='' defaultChecked >
 								Wybierz miasto
 							</option>
+                            {cities.map(city => {
+                                return <option key={city.id} value={city.id}>{city.city}</option>
+                            })}
 						</select>
 					</div>
 					<input type='email' placeholder='E-mail' />
