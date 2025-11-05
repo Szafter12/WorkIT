@@ -70,19 +70,27 @@ class PostsController extends Controller
         $specializations = $request->query('specializations');
 
         if ($searchBar) {
-            $query->where('title', 'like', '%' . $searchBar . '%');
+            $query->where('job_title', 'like', '%' . $searchBar . '%');
         }
         if ($level) {
-            $query->whereIn('level_id', $level);
+            $query->whereHas('level', function ($q) use ($level) {
+                $q->whereIn('level.id', $level);
+            });
         }
         if ($workDimension) {
-            $query->whereIn('work_dimension_id', $workDimension);
+            $query->whereHas('work_dimension', function ($q) use ($workDimension) {
+                $q->whereIn('work_dimension.id', $workDimension);
+            });
         }
         if ($workMode) {
-            $query->whereIn('work_mode_id', $workMode);
+            $query->whereHas('work_mode', function ($q) use ($workMode) {
+                $q->whereIn('work_mode.id', $workMode);
+            });
         }
         if ($contractType) {
-            $query->whereIn('contract_type_id', $contractType);
+            $query->whereHas('contract_type', function ($q) use ($contractType) {
+                $q->whereIn('contract_type.id', $contractType);
+            });
         }
         if ($abilities) {
             $query->whereHas('abilities', function ($q) use ($abilities) {
