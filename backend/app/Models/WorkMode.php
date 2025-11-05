@@ -14,7 +14,7 @@ class WorkMode extends Model
     protected $table = "work_mode";
 
     protected $fillable = [
-        'work_mode_name'
+        'name'
     ];
 
     public function posts() {

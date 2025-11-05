@@ -63,11 +63,11 @@ class PostsController extends Controller
     {
         $searchBar = $request->input('searchBar');
         $level = $request->query('level');
-        $workDimension = $request->query('workDimension');
-        $workMode = $request->query('workMode');
-        $contractType = $request->query('contractType');
-        $abilities = $request->query('abilities');
-        $specializations = $request->query('specializations');
+        $workDimension = $request->query('dimension');
+        $workMode = $request->query('mode');
+        $contractType = $request->query('contract');
+        $abilities = $request->query('tech');
+        $specializations = $request->query('specialization');
 
         if ($searchBar) {
             $query->where('job_title', 'like', '%' . $searchBar . '%');

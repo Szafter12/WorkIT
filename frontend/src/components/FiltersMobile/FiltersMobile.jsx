@@ -2,12 +2,13 @@ import { SearchBar__info } from '../SearchBar__info/SearchBar__info'
 import styles from './FiltersMobile.module.scss'
 import CLOSE from '../../assets/icons/close.png'
 import { SmallBox } from '../SmallBox/SmallBox'
-import { filters } from '../../constants/filters'
 import { FilterBox } from '../FilterBox/FilterBox'
+import { LABELS} from "../../constants/labels.js";
 
 export function FiltersMobile({
 	specializations,
 	tech,
+    filters,
 	setIsFilterMenuShown,
 	activeCategories,
 	toggleSpecializationsCategory,
@@ -21,17 +22,17 @@ export function FiltersMobile({
 
 	const setFilterFun = name => {
 		switch (name) {
-			case 'Poziom stanowiska':
+			case 'level':
 				testFun = toggleLvlCategory
 				break
 
-			case 'Rodzaj umowy':
+			case 'ContractType':
 				testFun = toggleContractCategory
 				break
-			case 'Wymiar pracy':
+			case 'workDimension':
 				testFun = toggleDimensionCategory
 				break
-			case 'Tryb pracy':
+			case 'WorkMode':
 				testFun = toggleModeCategory
 				break
 		}
@@ -63,11 +64,11 @@ export function FiltersMobile({
 				setFilterFun(el.name)
 				return (
 					<div>
-						<h3>{el.name}</h3>
+						<h3>{LABELS[el.name]}</h3>
 						<div>
 							{
 								<FilterBox
-									filterContent={el.filterContent}
+									filterContent={el.data}
 									activeCategories={activeCategories}
 									isMobile={true}
 									onChange={testFun}

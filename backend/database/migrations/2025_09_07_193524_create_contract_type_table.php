@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('contract_type', function (Blueprint $table) {
             $table->id('id');
-            $table->string('contract_name', 50)->unique();
+            $table->string('name', 50)->unique();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_polish_ci';
         });

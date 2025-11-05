@@ -14,7 +14,7 @@ class JobLevel extends Model
     protected $table = "job_level";
 
     protected $fillable = [
-        'level'
+        'name'
     ];
 
     public function posts() {

@@ -35,6 +35,7 @@ export function SearchBar__info({
 				{specializations.slice(0, visibleSpecializationCount).map(el => {
 					return (
 						<SmallBox
+                            id={el.id}
 							activeCategories={activeCategories}
 							toggleCategory={toggleSpecializationsCategory}
 							arrow={false}
@@ -54,6 +55,7 @@ export function SearchBar__info({
 				{tech.slice(0, visibleTechCount).map(el => {
 					return (
 						<SmallBox
+                            id={el.id}
 							name={el.ability_name}
 							activeCategories={activeCategories}
 							toggleCategory={toggleTechCategory}

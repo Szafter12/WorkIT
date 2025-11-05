@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('work_dimension', function (Blueprint $table) {
             $table->id('id');
-            $table->string('work_dimension_name', 100)->unique();
+            $table->string('name', 100)->unique();
             $table->charset = 'utf8';
             $table->collation = 'utf8_polish_ci';
         });

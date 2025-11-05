@@ -14,7 +14,7 @@ class ContractType extends Model
     protected $table = "contract_type";
 
     protected $fillable = [
-        'contract_name'
+        'name'
     ];
 
     public function posts() {

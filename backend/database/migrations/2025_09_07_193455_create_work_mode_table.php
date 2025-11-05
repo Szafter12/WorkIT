@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('work_mode', function (Blueprint $table) {
             $table->id('id');
-            $table->string('work_mode_name', 25)->unique();
+            $table->string('name', 25)->unique();
             $table->charset = 'utf8';
             $table->collation = 'utf8_polish_ci';
         });

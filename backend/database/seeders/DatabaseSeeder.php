@@ -188,22 +188,22 @@ class DatabaseSeeder extends Seeder
 
         ContractType::factory()
             ->sequence(
-                ['contract_name' => 'B2B'],
-                ['contract_name' => 'Umowa o dzieło'],
-                ['contract_name' => 'Umowa o pracę'],
-                ['contract_name' => 'Umowa o staż'],
-                ['contract_name' => 'Umowa zlecenie']
+                ['name' => 'B2B'],
+                ['name' => 'Umowa o dzieło'],
+                ['name' => 'Umowa o pracę'],
+                ['name' => 'Umowa o staż'],
+                ['name' => 'Umowa zlecenie']
             )
             ->count(5)
             ->create();
 
         JobLevel::factory()
             ->sequence(
-                ['level' => 'Intern'],
-                ['level' => 'Junior'],
-                ['level' => 'Mid'],
-                ['level' => 'Senior'],
-                ['level' => 'Lead'],
+                ['name' => 'Intern'],
+                ['name' => 'Junior'],
+                ['name' => 'Mid'],
+                ['name' => 'Senior'],
+                ['name' => 'Lead'],
             )
             ->count(5)
             ->create();
@@ -230,25 +230,25 @@ class DatabaseSeeder extends Seeder
 
         WorkDimension::factory()
             ->sequence(
-                ['work_dimension_name' => 'Pełny etat'],
-                ['work_dimension_name' => 'Część etatu'],
-                ['work_dimension_name' => 'Praktyki'],
-                ['work_dimension_name' => 'Wolontariat']
+                ['name' => 'Pełny etat'],
+                ['name' => 'Część etatu'],
+                ['name' => 'Praktyki'],
+                ['name' => 'Wolontariat']
             )
             ->count(4)
             ->create();
 
         WorkMode::factory()
             ->sequence(
-                ['work_mode_name' => 'Zdalna'],
-                ['work_mode_name' => 'Hybrydowa'],
-                ['work_mode_name' => 'Stacjonarna']
+                ['name' => 'Zdalna'],
+                ['name' => 'Hybrydowa'],
+                ['name' => 'Stacjonarna']
             )
             ->count(3)
             ->create();
 
         $companies = Companies::factory()->count(5)->create();
-        
+
         foreach ($companies as $company) {
             CompanyAddress::factory()->create([
                 'company_id' => $company->id,
@@ -260,7 +260,7 @@ class DatabaseSeeder extends Seeder
         foreach ($users as $user) {
             $randomNumber = mt_rand(5, 10);
             $randomAbility = collect($abilities)->random($randomNumber);
-            
+
             foreach ($randomAbility as $ability) {
                 UserAbilities::factory()->create([
                     'user_id' => $user->id,

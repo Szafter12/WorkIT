@@ -2,20 +2,19 @@ import { SearchBar__info } from '../SearchBar__info/SearchBar__info'
 import styles from './SearchBar.module.scss'
 import { MainButton } from '../MainButton/MainButton'
 import GLASS from '../../assets/icons/magnifying-glass.png'
-import DARK_GLASS from '../../assets/icons/magnifying-glass-dark.png'
 import { FilterBtn } from '../FilterBtn/FilterBtn'
-import { filters } from '../../constants/filters'
 import { FilterBox } from '../FilterBox/FilterBox'
 import { useState, useEffect } from 'react'
 import { resize } from '../../hooks/resize'
 import ARROW from '../../assets/icons/arrow.png'
 import { FiltersMobile } from '../FiltersMobile/FiltersMobile'
 import { SmallBox } from '../SmallBox/SmallBox'
-import axiosInstance from '../../api/axiosInstance'
-import debounce from 'lodash/debounce'
+import { useFetchPosts } from '../../hooks/useFetchPosts';
+import {LABELS} from '../../constants/labels.js'
+import {useNavigate} from "react-router-dom";
 
-
-export function SearchBar({ specializations, tech }) {
+export function SearchBar({ specializations, tech, filters }) {
+    const navigate = useNavigate()
 	const [currentFilterBox, setCurrentFilterBox] = useState('')
 
 	const [activeCategories, setactiveCategories] = useState([])
@@ -29,39 +28,11 @@ export function SearchBar({ specializations, tech }) {
 	const [isMobile, setIsMobile] = useState(false)
 	const [isFilterMenuShown, setIsFilterMenuShown] = useState(false)
 
-	const [posts, setPosts] = useState([])
-	const [keywords, setKeywords] = useState('')
-	const [isSearchContentShown, setisSearchContentShown] = useState(false)
-	const [inputKeywordsValue, setInputKeywordsValue] = useState('')
-
-	const [cities, setCities] = useState([])
-	const [Citieskeywords, setCitiesKeywords] = useState('')
-	const [citiesInputValue, setCitiesInputValue] = useState('')
-	const [isCitiesContentShown, setisCitiesContentShown] = useState(false)
+    const { posts, setPosts } = useFetchPosts(techCategories, specializationsCategories, lvlCategories, contractCategories, dimensionCategories, modeCategories);
 
 	const mobileSize = 1000
 	let testFun = null
 	resize(mobileSize, setIsMobile)
-
-	const getCities = async () => {
-		const city = {
-			Citieskeywords,
-		}
-		if (Citieskeywords.length > 0) {
-			try {
-				const res = await axiosInstance.post('cities', city)
-				setCities(state => (state = res.data))
-			} catch (err) {
-				console.log(err)
-			}
-		} else {
-			setCities([])
-		}
-	}
-
-	useEffect(() => {
-		getCities()
-	}, [Citieskeywords])
 
 	function handleFilterBox(name) {
 		if (currentFilterBox === name) {
@@ -70,51 +41,50 @@ export function SearchBar({ specializations, tech }) {
 			setCurrentFilterBox(prevState => (prevState = name))
 		}
 	}
-
 	const toggleActiveCategory = (category) => {
 		setactiveCategories(prevState => {
 			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
 		})
 	}
 
-	const toggleTechCategory = (category) => {
+	const toggleTechCategory = (id, category) => {
 		setTechCategories(prevState => {
-			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+			return prevState.includes(id) ? prevState.filter(c => c !== id) : [...prevState, id]
 		})
 		toggleActiveCategory(category)
 	}
 
-	const toggleSpecializationsCategory = (category) => {
+	const toggleSpecializationsCategory = (id, category) => {
 		setSpecializationsCategories(prevState => {
-			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+			return prevState.includes(id) ? prevState.filter(c => c !== id) : [...prevState, id]
 		})
 		toggleActiveCategory(category)
 	}
 
-	const toggleLvlCategory = (category) => {
+	const toggleLvlCategory = (id, category) => {
 		setLvlCategories(prevState => {
-			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+			return prevState.includes(id) ? prevState.filter(c => c !== id) : [...prevState, id]
 		})
 		toggleActiveCategory(category)
 	}
 
-	const toggleContractCategory = (category) => {
+	const toggleContractCategory = (id, category) => {
 		setContractCategories(prevState => {
-			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+			return prevState.includes(id) ? prevState.filter(c => c !== id) : [...prevState, id]
 		})
 		toggleActiveCategory(category)
 	}
 
-	const toggleDimensionCategory = (category) => {
+	const toggleDimensionCategory = (id, category) => {
 		setDimensionCategories(prevState => {
-			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+			return prevState.includes(id) ? prevState.filter(c => c !== id) : [...prevState, id]
 		})
 		toggleActiveCategory(category)
 	}
 
-	const toggleModeCategory = (category) => {
+	const toggleModeCategory = (id, category) => {
 		setModeCategories(prevState => {
-			return prevState.includes(category) ? prevState.filter(c => c !== category) : [...prevState, category]
+			return prevState.includes(id) ? prevState.filter(c => c !== id) : [...prevState, id]
 		})
 		toggleActiveCategory(category)
 	}
@@ -125,64 +95,34 @@ export function SearchBar({ specializations, tech }) {
 
 	const setFilterFun = (name) => {
 		switch (name) {
-			case 'Poziom stanowiska':
+			case 'level':
 				testFun = toggleLvlCategory
 				break
-
-			case 'Rodzaj umowy':
+			case 'contractType':
 				testFun = toggleContractCategory
 				break
-			case 'Wymiar pracy':
+			case 'workDimension':
 				testFun = toggleDimensionCategory
 				break
-			case 'Tryb pracy':
+			case 'workMode':
 				testFun = toggleModeCategory
 				break
 		}
 	}
-
-	const debouncedKeywordSearch = debounce((value) => {
-		setKeywords(value)
-	}, 300)
-
-	const debounceCitiesSearch = debounce((value) => {
-		setCitiesKeywords(value)
-	}, 300)
-
-	const HandleKeywordsInput = (e) => {
-		setInputKeywordsValue(e.target.value)
-		debouncedKeywordSearch(e.target.value)
-	}
-
-	const handleShowInputContent = () => {
-		setisSearchContentShown(true)
-	}
-
-	const handleHideInputContent = () => {
-		setTimeout(() => {
-			setisSearchContentShown(false)
-		}, 100)
-	}
-
-	const setInputValue = (el) => {
-		setInputKeywordsValue(prevState => (prevState = el))
-	}
-
-	const handleCitiesInput = (e) => {
-		setCitiesInputValue(e.target.value)
-		debounceCitiesSearch(e.target.value)
-	}
-
-	const handleShowCitiesContent = () => {
-		setisCitiesContentShown(true)
-	}
-
-	const handleHideCitiesContent = () => {
-		setTimeout(() => {
-			setisCitiesContentShown(false)
-		}, 100)
-	}
-
+    const handleSearch = () => {
+        navigate('/praca', {
+            state: {
+                filters: {
+                    tech: techCategories,
+                    specializations: specializationsCategories,
+                    level: lvlCategories,
+                    contract: contractCategories,
+                    dimension: dimensionCategories,
+                    mode: modeCategories,
+                }
+            }
+        })
+    }
 	return (
 		<div className={styles.searchBar}>
 			<div className={styles.inputContainer}>
@@ -190,55 +130,13 @@ export function SearchBar({ specializations, tech }) {
 					<input
 						type='text'
 						placeholder='Stanowisko, firma, słowo kluczowe'
-						onChange={HandleKeywordsInput}
-						onFocus={handleShowInputContent}
-						onBlur={handleHideInputContent}
-						value={inputKeywordsValue}
 					/>
-					{isSearchContentShown && posts.length > 0 && (
-						<div className={styles.inputs__content}>
-							<ul>
-								<div className={styles.flex}>
-									<img src={DARK_GLASS} alt='' />
-									<h3>Sugerowane wyszukiwania:</h3>
-								</div>
-								{posts.map(el => {
-									return (
-										<li key={el}>
-											<button onClick={() => setInputValue(el)}>{el}</button>
-										</li>
-									)
-								})}
-							</ul>
-						</div>
-					)}
 				</div>
 				<div className={`${styles.inputs} ${styles.inputs__right}`}>
 					<input
 						type='text'
 						placeholder='Lokalizacja'
-						onChange={handleCitiesInput}
-						onFocus={handleShowCitiesContent}
-						onBlur={handleHideCitiesContent}
-						value={citiesInputValue}
 					/>
-					{isCitiesContentShown && cities.length > 0 && (
-						<div className={styles.inputs__content}>
-							<ul>
-								<div className={styles.flex}>
-									<img src={DARK_GLASS} alt='' />
-									<h3>Miasta: </h3>
-								</div>
-								{cities.map(el => {
-									return (
-										<li key={el}>
-											<button onClick={() => setCitiesInputValue(el)}>{el}</button>
-										</li>
-									)
-								})}
-							</ul>
-						</div>
-					)}
 				</div>
 			</div>
 			{!isMobile && (
@@ -268,15 +166,15 @@ export function SearchBar({ specializations, tech }) {
 							return (
 								<div key={el.name} className={styles.filterContainer}>
 									<FilterBtn
-										arrow={currentFilterBox === el.name ? false : true}
+										arrow={currentFilterBox !== el.name}
 										onClick={() => handleFilterBox(el.name)}>
-										{el.name}
+										{LABELS[el.name]}
 									</FilterBtn>
 									{currentFilterBox === el.name && (
 										<FilterBox
 											activeCategories={activeCategories}
 											onChange={testFun}
-											filterContent={el.filterContent}
+											filterContent={el.data}
 										/>
 									)}
 								</div>
@@ -295,6 +193,7 @@ export function SearchBar({ specializations, tech }) {
 					<FiltersMobile
 						specializations={specializations}
 						tech={tech}
+                        filters={filters}
 						setIsFilterMenuShown={setIsFilterMenuShown}
 						activeCategories={activeCategories}
 						toggleLvlCategory={toggleLvlCategory}
@@ -305,8 +204,8 @@ export function SearchBar({ specializations, tech }) {
 						toggleTechCategory={toggleTechCategory}
 					/>
 				)}
-				<MainButton icon={GLASS} bgc={true}>
-					{posts.length > 0 && <span className={styles.counter}>{posts.length}</span>}
+				<MainButton onClick={handleSearch} icon={GLASS} bgc={true}>
+					{posts?.data?.length > 0 && <span className={styles.counter}>{posts.data.length}</span>}
 					Szukaj
 				</MainButton>
 			</div>

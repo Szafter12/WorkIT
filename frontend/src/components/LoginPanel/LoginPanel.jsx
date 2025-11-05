@@ -5,20 +5,7 @@ import { Link } from 'react-router-dom'
 import axiosInstance from '../../api/axiosInstance'
 
 export function LoginPanel({ register }) {
-	const [cities, setCities] = useState([])
-
-	const getCities = async () => {
-		const res = await axiosInstance.get('cities')
-		setCities(prevCities => (prevCities = res.data))
-	}
-
-	useEffect(() => {
-		getCities()
-	}, [])
-
-	console.log(cities)
-
-	if (!register) {
+    if (!register) {
 		return (
 			<div className={styles.loginPanel}>
 				<p>Zaloguj się do swojego konta</p>
@@ -52,9 +39,6 @@ export function LoginPanel({ register }) {
 							<option value='' defaultChecked >
 								Wybierz miasto
 							</option>
-							{cities.map(city => {
-								return <option value={city}>{city}</option>
-							})}
 						</select>
 					</div>
 					<input type='email' placeholder='E-mail' />

@@ -17,7 +17,7 @@ class WorkModeFactory extends Factory
     public function definition(): array
     {
         return [
-            'work_mode_name' => fake()->word()
+            'name' => fake()->word()
         ];
     }
 }

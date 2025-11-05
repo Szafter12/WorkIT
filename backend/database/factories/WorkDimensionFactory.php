@@ -17,7 +17,7 @@ class WorkDimensionFactory extends Factory
     public function definition(): array
     {
         return [
-            "work_dimension_name" => fake()->word(),
+            "name" => fake()->word(),
         ];
     }
 }

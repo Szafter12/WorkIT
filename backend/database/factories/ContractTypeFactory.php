@@ -17,7 +17,7 @@ class ContractTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            "contract_name" => fake()->word()
+            "name" => fake()->word()
         ];
     }
 }

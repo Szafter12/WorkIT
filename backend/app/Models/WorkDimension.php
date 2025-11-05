@@ -14,7 +14,7 @@ class WorkDimension extends Model
     protected $table = "work_dimension";
 
     protected $fillable = [
-        'work_dimension_name'
+        'name'
     ];
 
     public function posts() {

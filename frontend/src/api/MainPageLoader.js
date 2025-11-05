@@ -6,7 +6,8 @@ export const MainPageLoader = async () => {
 
 		return {
 			specializations: res.data.specializations,
-			tech: res.data.technology
+			tech: res.data.technology,
+            filters: res.data.filters,
 		}
 	} catch (error) {
 		console.log('Błąd podczas pobierania danych z serwera')
