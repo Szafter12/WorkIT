@@ -17,4 +17,8 @@ class UserSocialLinks extends Model
         "platform_name",
         "url"
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

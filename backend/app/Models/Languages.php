@@ -14,4 +14,8 @@ class Languages extends Model
     protected $fillable = [
         'language'
     ];
+
+    public function users() {
+        return $this->belongsToMany(User::class, 'user_language', 'language_id', 'user_id');
+    }
 }

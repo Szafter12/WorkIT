@@ -16,4 +16,8 @@ class WorkMode extends Model
     protected $fillable = [
         'work_mode_name'
     ];
+
+    public function posts() {
+        return $this->hasMany(Posts::class);
+    }
 }

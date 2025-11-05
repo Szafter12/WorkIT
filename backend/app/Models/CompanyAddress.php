@@ -20,4 +20,11 @@ class CompanyAddress extends Model
         'city_id'
     ];
     
+    public function company() {
+        return $this->belongsTo(Companies::class);
+    }
+
+    public function city() {
+        return $this->belongsTo(City::class);
+    }
 }

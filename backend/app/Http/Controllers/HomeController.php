@@ -14,8 +14,6 @@ class HomeController extends Controller
     {
         $specializations = Specializations::all();
         $technology = Abilities::all();
-        
-        
 
         return response()->json([
             'specializations' => $specializations,
@@ -23,5 +21,5 @@ class HomeController extends Controller
         ]);
     }
 
-    
+
 }

@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Laravel\Sanctum\HasApiTokens;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +30,30 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    public function abilities() {
+        return $this->belongsToMany(Abilities::class, 'user_abilities', 'user_id', 'ability_id');
+    }
+
+    public function address() {
+        return $this->hasOne(UserAddress::class);
+    }
+
+    public function education() {
+        return $this->hasMany(UserEducation::class);
+    }
+
+    public function languages() {
+        return $this->belongsToMany(UserLanguage::class, 'user_language', 'user_id', 'language_id');
+    }
+
+    public function socials() {
+        return $this->hasMany(UserSocialLinks::class);
+    }
+
+    public function works() {
+        return $this->hasMany(UserWork::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

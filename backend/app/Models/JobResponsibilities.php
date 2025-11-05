@@ -15,4 +15,8 @@ class JobResponsibilities extends Model
         'post_id',
         'responsibilities'
     ];
+
+    public function post() {
+        return $this->belongsTo(Posts::class, 'post_id', 'id');
+    }
 }
