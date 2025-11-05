@@ -11,7 +11,6 @@ export function LoginPanel({ register }) {
     const load = async () => {
         const list = await getCities();
             setCities(list);
-            console.log(list);
     };
 
     useEffect(() => {

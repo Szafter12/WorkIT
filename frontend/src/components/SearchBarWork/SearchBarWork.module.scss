@@ -1,3 +1,28 @@
 .searchBarWork {
-    margin-top: 150px;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  padding: 2em 1em;
+  width: 100%;
+  background-color: var(--bgc-color);
+  box-shadow: 0 0 8px rgba(0,0,0,0.33);
+  border-radius: 12px;
+  z-index: 100;
+
+  & input {
+    flex: 1;
+    border: 1px solid #a0aec0;
+    padding: 0.5em 1em;
+    outline: none;
+  }
+
+  & .searchInput {
+    border-right: none;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+
+  & button {
+    margin-left: 20px;
+  }
 }
