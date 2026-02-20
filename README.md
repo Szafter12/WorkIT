@@ -1,1 +1,1 @@
-# Application in development
+# In development
