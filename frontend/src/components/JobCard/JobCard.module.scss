@@ -1,0 +1,118 @@
+$primary-blue: #004fe3;
+$bg-tag: #eff3fa;
+$text-main: #2c3e50;
+$text-muted: #7f8c8d;
+$super-yellow: #ffeb3b;
+$border-radius: 12px;
+$transition: all 0.25s ease-in-out;
+
+.jobCard {
+  background: #ffffff;
+  border-radius: $border-radius;
+  border: 1px solid #eef2f6;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: $transition;
+  cursor: pointer;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    border-color: var(--main-color);
+  }
+}
+
+.superBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: $super-yellow;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 0 $border-radius 0 $border-radius;
+}
+
+.mainContent {
+  display: flex;
+  gap: 20px;
+}
+
+.logoBox {
+  min-width: 60px;
+  height: 60px;
+  background: #fdfdfd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f0f0f0;
+  font-weight: bold;
+  color: $primary-blue;
+}
+
+.infoSection {
+  flex: 1;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    color: var(--main-color);
+    font-weight: 600;
+    line-height: 1.6;
+    font-size: clamp(2rem, 3vw, 2.4rem);
+  }
+}
+
+.companyMeta {
+  margin: 6px 0;
+  font-size: 14px;
+  color: $text-main;
+
+  span {
+    color: $text-muted;
+    font-weight: normal;
+  }
+}
+
+.tagsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tag {
+  background: $bg-tag;
+  color: #3e63a3;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #f1f1f1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: $text-muted;
+}
+
+.quickApply {
+  color: #008a25;
+  font-weight: 600;
+
+}

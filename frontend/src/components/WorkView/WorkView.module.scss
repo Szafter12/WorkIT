@@ -1,15 +1,19 @@
 .workView {
   & header {
-    position: absolute;
+   position: relative; // Zmienione z absolute - teraz header zajmuje miejsce na stronie
     left: 0;
-    top: 80px;
-    padding: 40px 100px;
-    height: 150px;
+    top: 0; // Jeśli masz navbar 80px, lepiej dać margin-top w workView lub tutaj
+    padding: 60px 100px;
+    height: 200px; // Zwiększyłem nieco, żeby pomieścić h2 i pasek
     width: 100%;
     background-image: url('/img/image_header_listing_it.webp');
+    background-size: cover;
+    background-position: center;
     border-bottom-left-radius: 80px;
     border-bottom-right-radius: 80px;
-    z-index: -1;
+    display: flex;
+    align-items: center;
+    z-index: 1;
   }
 
   & h2 {
@@ -20,4 +24,11 @@
     background-color: var(--secondary-color);
     border-radius: 12px;
   }
+}
+
+.content {
+  margin: 0 auto 0 auto;
+	padding: 0 3rem;
+	width: 100%;
+	max-width: 1400px;
 }

@@ -4,7 +4,7 @@ export async function getCities() {
         const res = await axiosInstance.get('/api/cities');
         return res.data.cities;
     } catch (err) {
-        console.log('Error fetching cities from server');
+        console.log('Błąd podczas pobierania danych z serwera.');
         return [];
     }
 }

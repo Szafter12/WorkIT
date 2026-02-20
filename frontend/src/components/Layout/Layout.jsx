@@ -14,7 +14,7 @@ import { BurgerMenu } from '../BurgerMenu/BurgerMenu'
 import { MobileMenu } from '../MobileMenu/MobileMenu'
 import { resize } from '../../hooks/resize'
 
-export function Layout({ children, isCentered }) {
+export function Layout({ children, isCentered, abs }) {
 	const [isLoginPrevShown, setIsLoginPrevShown] = useState(false)
 	const [isMobile, setIsMobile] = useState(false)
 	const [isMobileShown, setIsMobileShown] = useState(false)
@@ -23,7 +23,7 @@ export function Layout({ children, isCentered }) {
 	resize(mobileSize, setIsMobile)
 
 	useEffect(() => {
-		const preventDefault = (e) => e.preventDefault()
+		const preventDefault = e => e.preventDefault()
 
 		if (isMobileShown && isMobile) {
 			document.body.style.overflowY = 'hidden'
@@ -69,7 +69,9 @@ export function Layout({ children, isCentered }) {
 					)}
 					{isMobile && <BurgerMenu onClick={handleMobileMenu} />}
 				</TopBar>
-				<Main center={isCentered}>{children}</Main>
+				<Main center={isCentered} absolute={abs}>
+					{children}
+				</Main>
 				<Footer />
 				{isMobile && <MobileMenu isMobileShown={isMobileShown} />}
 			</LayoutContent>

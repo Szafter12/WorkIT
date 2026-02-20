@@ -2,7 +2,6 @@ import { Layout } from '../../components/Layout/Layout'
 import WorkView from '../../components/WorkView/WorkView'
 import {useLocation} from "react-router-dom";
 import {useFetchPosts} from "../../hooks/useFetchPosts.js";
-import {useState} from "react";
 
 export function Work() {
     const location = useLocation()
@@ -17,7 +16,7 @@ export function Work() {
     )
 
 	return (
-		<Layout>
+		<Layout abs={true}>
 			<WorkView posts={posts.data} />
 		</Layout>
 	)
