@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
@@ -41,10 +42,6 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function abilities() {
-        return $this->belongsToMany(Abilities::class, 'user_abilities', 'user_id', 'ability_id');
-    }
-
     public function address() {
         return $this->hasOne(UserAddress::class);
     }
@@ -54,7 +51,14 @@ class User extends Authenticatable
     }
 
     public function languages() {
-        return $this->belongsToMany(UserLanguage::class, 'user_language', 'user_id', 'language_id');
+
+    return $this->belongsToMany(Languages::class, 'user_language', 'user_id', 'language_id')
+                ->withPivot('level');
+    }
+
+
+    public function abilities() {
+        return $this->belongsToMany(Abilities::class, 'user_abilities', 'user_id', 'ability_id');
     }
 
     public function socials() {

@@ -4,6 +4,8 @@ import { MainPageLoader } from '../api/MainPageLoader'
 import { Login } from '../pages/LoginPanel/Login'
 import { Work } from '../pages/Work/Work'
 import { Register } from '../pages/RegisterPanel/Register'
+import { UserPanel } from '../pages/UserPanel/UserPanel'
+import { ProtectedRoute } from '../components/ProtectedRoute/ProtectedRoute'
 
 export const router = createBrowserRouter(
 	[
@@ -24,10 +26,18 @@ export const router = createBrowserRouter(
 			path: '/praca',
 			element: <Work />,
 		},
+		{
+			path: '/profile',
+			element: (
+				<ProtectedRoute>
+					<UserPanel />
+				</ProtectedRoute>
+			),
+		},
 	],
 	{
 		future: {
 			v7_startTransition: true,
 		},
-	}
+	},
 )

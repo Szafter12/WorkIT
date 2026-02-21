@@ -11,34 +11,41 @@ use Illuminate\Auth\Events\Registered;
 class AuthController extends Controller
 {
     public function register(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:50',
-            'surname' => 'required|string|max:50',
-            'email' => 'required|email|unique:users',
-            'phone' => 'required|size:9|unique:users',
-            'password' => 'required|min:8|confirmed',
-            'date_of_birth' => 'required|date',
-        ]);
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:50',
+        'surname' => 'required|string|max:50',
+        'email' => 'required|email|unique:users',
+        'phone' => 'required|size:9|unique:users',
+        'password' => 'required|min:8|confirmed',
+        'date_of_birth' => 'required|date',
+        'address_line' => 'required|string|max:100',
+        'city_id' => 'required|exists:city,id', 
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
+    }
 
-        $user = User::create([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'date_of_birth' => $request->date_of_birth,
-            'password' => Hash::make($request->password),
-            'prof_picture_path' => 'default.jpg',
-            'background_picture_path' => 'bg-default.jpg',
-            'description' => $request->description ?? '',
-        ]);
+    $user = User::create([
+        'name' => $request->name,
+        'surname' => $request->surname,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'date_of_birth' => $request->date_of_birth,
+        'password' => Hash::make($request->password),
+        'prof_picture_path' => 'default.jpg',
+        'background_picture_path' => 'bg-default.jpg',
+        'description' => $request->description ?? '',
+    ]);
 
-        event(new Registered($user));
-        $token = auth('api')->login($user);
+    $user->address()->create([
+        'street' => $request->address_line,
+        'city_id' => $request->city_id,
+    ]);
+
+    event(new Registered($user));
+    $token = auth('api')->login($user);
 
         return $this->respondWithToken($token);
     }

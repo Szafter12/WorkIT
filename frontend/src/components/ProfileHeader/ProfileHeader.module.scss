@@ -1,0 +1,80 @@
+.headerCard {
+  background: var(--white-color);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.cover {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  background-color: var(--secondary-color);
+
+  .changeCover {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+.profileRow {
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  position: relative;
+
+  .avatarContainer {
+    margin-top: -60px;
+    position: relative;
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 6px solid var(--white-color);
+      object-fit: cover;
+      background: #eee;
+    }
+    .changeAvatar {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: var(--accent-color);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .userData {
+    flex: 1;
+    h2 { margin: 0; color: var(--text-color); font-size: 26px; }
+    p { margin: 5px 0 0 0; color: #666; font-size: 15px; }
+  }
+
+  .mainBtn {
+    background: var(--main-color);
+    color: var(--white-color);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover { background: var(--secondary-color); }
+  }
+}
