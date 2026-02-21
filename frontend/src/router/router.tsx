@@ -5,7 +5,8 @@ import { Login } from '../pages/LoginPanel/Login'
 import { Work } from '../pages/Work/Work'
 import { Register } from '../pages/RegisterPanel/Register'
 import { UserPanel } from '../pages/UserPanel/UserPanel'
-import { ProtectedRoute } from '../components/ProtectedRoute/ProtectedRoute'
+import { ProtectedRoute } from '../guards/ProtectedRoute/ProtectedRoute'
+import { GuestRoute } from '../guards/GuestRoute/GuestRoute'
 
 export const router = createBrowserRouter(
 	[
@@ -16,11 +17,19 @@ export const router = createBrowserRouter(
 		},
 		{
 			path: '/logowanie',
-			element: <Login />,
+			element: (
+				<GuestRoute>
+					<Login />
+				</GuestRoute>
+			),
 		},
 		{
 			path: '/rejestracja',
-			element: <Register />,
+			element: (
+				<GuestRoute>
+					<Register />
+				</GuestRoute>
+			),
 		},
 		{
 			path: '/praca',

@@ -1,5 +1,4 @@
-// javascript
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axiosInstance from '../api/axiosInstance';
 
 export function useFetchPosts(
@@ -11,9 +10,19 @@ export function useFetchPosts(
     modeCategories = []
 ) {
     const [posts, setPosts] = useState([]);
+    const [paginationData, setPaginationData] = useState(null); 
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+    const [loading, setLoading] = useState(false);
 
-    const fetchPosts = async () => {
+    const fetchPosts = useCallback(async (isInitial = false) => {
+        if (loading || (!hasMore && !isInitial)) return;
+
+        setLoading(true);
         const params = new URLSearchParams();
+        
+        const pageToFetch = isInitial ? 1 : page;
+        params.append('page', pageToFetch);
 
         if (techCategories.length > 0) techCategories.forEach(id => params.append('tech[]', id));
         if (specializationsCategories.length > 0) specializationsCategories.forEach(id => params.append('specialization[]', id));
@@ -24,24 +33,33 @@ export function useFetchPosts(
 
         try {
             const res = await axiosInstance.get(`/api/posts?${params.toString()}`);
-            setPosts(res.data);
+            
+            const paginator = res.data.data; 
+            const newData = paginator.data; 
+
+            setPosts(prev => isInitial ? newData : [...prev, ...newData]);
+            
+            setPaginationData(paginator);
+            
+            setHasMore(paginator.current_page < paginator.last_page);
+            setPage(paginator.current_page + 1);
+
         } catch (err) {
-            console.log(err);
+            console.error('Błąd pobierania ofert:', err);
+        } finally {
+            setLoading(false);
         }
-    };
-
-    const depsKey = JSON.stringify({
-        techCategories,
-        specializationsCategories,
-        lvlCategories,
-        contractCategories,
-        dimensionCategories,
-        modeCategories
-    });
-
+    }, [page, hasMore, loading, techCategories, specializationsCategories, lvlCategories, contractCategories, dimensionCategories, modeCategories]);
     useEffect(() => {
-        fetchPosts();
-    }, [depsKey]);
+        setHasMore(true);
+        fetchPosts(true);
+    }, [JSON.stringify({ techCategories, specializationsCategories, lvlCategories, contractCategories, dimensionCategories, modeCategories })]);
 
-    return { posts, setPosts, fetchPosts };
+    return { 
+        posts, 
+        paginationData,
+        loading, 
+        hasMore, 
+        fetchNextPage: () => fetchPosts(false) 
+    };
 }

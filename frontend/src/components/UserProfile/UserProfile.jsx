@@ -16,7 +16,7 @@ const UserProfile = ({ userDetails }) => {
           <main className={styles.mainContent}>
             
             <InfoSection title="O mnie" icon={null}>
-               <p className={styles.descriptionText}>{userDetails.user?.description}</p>
+               <p className={styles.descriptionText}>{userDetails.user.description}</p>
             </InfoSection>
 
             <InfoSection title="Doświadczenie zawodowe" icon={<Briefcase size={20} />}>
@@ -43,7 +43,7 @@ const UserProfile = ({ userDetails }) => {
           <aside className={styles.sidebar}>
             
             <InfoSection title="Lokalizacja" icon={<MapPin size={18} />}>
-              <p>{userDetails?.user_address?.street}, {userDetails?.user_address?.city_name}</p>
+              <p>{userDetails?.user_address?.street}, {userDetails?.user_address?.city.city}</p>
             </InfoSection>
 
             <InfoSection title="Języki" icon={<Globe size={18} />}>

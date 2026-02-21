@@ -11,17 +11,20 @@ class PostsController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        $query = Posts::orderBy('created_at', 'desc')->with(['company', 'level', 'workDimension', 'workMode', 'contractType', 'jobRequirements', 'jobResponsibilities', 'abilities', 'specializations']);
+{
+    $query = Posts::orderBy('created_at', 'desc')
+        ->with(['company', 'level', 'workDimension', 'workMode', 'contractType', 'jobRequirements', 'jobResponsibilities', 'abilities', 'specializations']);
 
-        $query = $this->search($query, $request);
-        $posts = $query->get();
+    $query = $this->search($query, $request);
+    
 
-        return response()->json([
-            'success' => true,
-            'data' => $posts
-        ], 200);
-    }
+    $posts = $query->paginate(10);
+
+    return response()->json([
+        'success' => true,
+        'data' => $posts 
+    ], 200);
+}
 
     /**
      * Store a newly created resource in storage.

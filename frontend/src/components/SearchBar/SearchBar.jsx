@@ -205,7 +205,6 @@ export function SearchBar({ specializations, tech, filters }) {
 					/>
 				)}
 				<MainButton onClick={handleSearch} icon={GLASS} bgc={true}>
-					{posts?.data?.length > 0 && <span className={styles.counter}>{posts.data.length}</span>}
 					Szukaj
 				</MainButton>
 			</div>
