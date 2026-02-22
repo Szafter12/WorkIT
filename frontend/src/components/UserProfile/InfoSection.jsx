@@ -9,8 +9,6 @@ const InfoSection = ({ title, icon, children, onAddClick }) => {
           {icon && <span className={styles.icon}>{icon}</span>}
           <h3>{title}</h3>
         </div>
-        
-        {/* Przycisk dodawania - np. nowej szkoły lub pracy */}
         {onAddClick && (
           <button className={styles.addBtn} onClick={onAddClick}>
             <Plus size={18} />

@@ -4,6 +4,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -19,7 +20,7 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::middleware('auth:api')->get('me', function () {
+    Route::get('me', function () {
     $user = auth()->user();
 
     $user->load([
@@ -40,7 +41,8 @@ Route::middleware('auth:api')->group(function () {
         'user_social_links' => $user->socials,
         'user_abilities' => $user->abilities,
     ]);
-});
+    });
+    Route::post('user/update-pictures', [UserController::class, 'updatePictures']);
 });
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {

@@ -6,9 +6,7 @@
 }
 
 .container {
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 0 15px;
+  max-width: 1200px;
 }
 
 .layout {
@@ -103,14 +101,9 @@ display: inline;
   background: var(--white-color);
   border-radius: 12px;
   border: 1px solid #eef0f2;
-  padding: 30px; // Większy padding dla oddechu
+  padding: 30px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
   transition: box-shadow 0.3s ease;
-
-  &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  }
-
   .header {
     display: flex;
     justify-content: space-between;
