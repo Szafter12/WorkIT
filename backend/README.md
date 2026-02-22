@@ -10,6 +10,8 @@ The backend section is designed as an independent, stateless REST API responsibl
 
 ### 🗄️ Models & Database Relationships
 
+![Database schema](readmePhotos/2.png)
+
 The backend heavily relies on Laravel's Eloquent ORM to interact with the MySQL database. The database architecture is designed with clear relationships between entities, ensuring data integrity and logical structuring.
 
 Key models and their relationships include:
