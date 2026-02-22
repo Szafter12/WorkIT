@@ -5,6 +5,7 @@ import { Login } from '../pages/LoginPanel/Login'
 import { Work } from '../pages/Work/Work'
 import { Register } from '../pages/RegisterPanel/Register'
 import { UserPanel } from '../pages/UserPanel/UserPanel'
+import { JobPostDetail } from '../pages/JobPostDetail/JobPostDetail'
 import { ProtectedRoute } from '../guards/ProtectedRoute/ProtectedRoute'
 import { GuestRoute } from '../guards/GuestRoute/GuestRoute'
 
@@ -43,6 +44,10 @@ export const router = createBrowserRouter(
 				</ProtectedRoute>
 			),
 		},
+		{
+			path: '/posts/:id',
+			element: <JobPostDetail />
+		}
 	],
 	{
 		future: {

@@ -42,7 +42,7 @@ $transition: all 0.25s ease-in-out;
 }
 
 .logoBox {
-  min-width: 60px;
+  width: 60px;
   height: 60px;
   background: #fdfdfd;
   border-radius: 8px;
@@ -52,6 +52,13 @@ $transition: all 0.25s ease-in-out;
   border: 1px solid #f0f0f0;
   font-weight: bold;
   color: $primary-blue;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .infoSection {

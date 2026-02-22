@@ -39,7 +39,7 @@ class PostsController extends Controller
      */
     public function show(string $id)
     {
-        $post = Posts::where('id', $id)->with(['company', 'level', 'workDimension', 'workMode', 'contractType', 'jobRequirements', 'jobResponsibilities', 'abilities', 'specializations'])->first();
+        $post = Posts::where('id', $id)->with(['company.address.city', 'level', 'workDimension', 'workMode', 'contractType', 'jobRequirements', 'jobResponsibilities', 'abilities', 'specializations'])->first();
 
         return response()->json([
             'success' => true,

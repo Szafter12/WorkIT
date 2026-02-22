@@ -17,4 +17,8 @@ class Companies extends Model
     public function posts() {
         return $this->hasMany(Posts::class);
     }
+
+    public function address() {
+    return $this->hasOne(CompanyAddress::class, 'company_id', 'id');
+}
 }
