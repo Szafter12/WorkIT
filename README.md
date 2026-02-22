@@ -18,3 +18,6 @@ WorkIT separates the client and server into two distinct architectures. The syst
 * PHP / Laravel (REST API)
 * MySQL (Database)
 * JSON Web Tokens (JWT) for Authentication
+
+![User Profile](readmePhotos/3.png)
+![Post profile](readmePhotos/4.png)
