@@ -39,7 +39,7 @@ const JobCard = ({ job }) => {
                         </div>
 
                         <p className={styles.companyMeta}>
-                            <strong>{job.company.company_name}</strong> <span>• </span>
+                            <strong>{job.company.company_name}</strong>
                         </p>
 
                         <div className={styles.tagsWrapper}>
