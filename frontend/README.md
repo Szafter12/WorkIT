@@ -1,50 +1,29 @@
-# React + TypeScript + Vite
+## 🎨 Frontend Documentation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The frontend handles the user interface, routing, and token management to ensure a smooth, page-reload-free experience.
 
-Currently, two official plugins are available:
+### Routing Structure
+React Router handles the application's view rendering. The primary dynamic routing map includes:
+* `/` - **Home / Job Board:** Displays the main feed of available IT job offers.
+* `/login` - **Login View:** Authentication form to exchange credentials for a JWT token.
+* `/register` - **Registration View:** Form to create a new user account.
+* `/posts/:id` - **Dynamic Job Details:** Fetches and displays full information about a specific job posting based on the URL parameter.
+* `/praca` - **Dynamic Job Details:** Fetches and displays full information about a specific job posting based on the URL parameter.
+* `/profile` - **Protected Route:** User dashboard to manage applications or profile details. Users are redirected to `/login` if no valid JWT is found.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Authentication Flow
+1. The user submits their credentials via the login form.
+2. The frontend receives the JWT from the backend API and stores it securely.
+3. The token is attached as a `Bearer` token to the `Authorization` header of all subsequent protected API requests (typically using an Axios interceptor or customized Fetch API).
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### UI & Theming
+The application's styling utilizes CSS variables to maintain a consistent design system, making global theme changes simple. The core palette is structured as follows:
+```css
+:root {
+  --main-color: #4855c6;
+  --secondary-color: #3745c2;
+  --white-color: #ffffff;
+  --text-color: #202557;
+  --accent-color: #ffe481;
+  --bgc-color: #fefefe;
+}
