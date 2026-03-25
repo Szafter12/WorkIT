@@ -1,4 +1,4 @@
-## 🎨 Frontend Documentation
+## Frontend Documentation
 
 The frontend handles the user interface, routing, and token management to ensure a smooth, page-reload-free experience.
 
